@@ -14,6 +14,7 @@ EXPORTS='["_main","_DG_TEST_GetGameTic","_DG_TEST_GetFrameCount","_DG_TEST_GetPl
 emcc -O2 -w -I"$ENGINE" -Iplatform "${SRCS[@]}" \
   -o build/doom.js \
   -sALLOW_MEMORY_GROWTH=1 \
+  -sASYNCIFY \
   -sEXPORTED_FUNCTIONS="$EXPORTS" \
   -sEXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' \
   -sENVIRONMENT=web \

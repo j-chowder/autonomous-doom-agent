@@ -23,7 +23,29 @@
     fatalBox.hidden = false;
   }
 
+  // Doom key codes (doomkeys.h) for the supported browser keys.
+  var KEYMAP = {
+    ArrowUp: 0xad, ArrowDown: 0xaf, ArrowLeft: 0xac, ArrowRight: 0xae,
+    ControlLeft: 0xa3, ControlRight: 0xa3, ShiftLeft: 0x80 + 0x36, ShiftRight: 0x80 + 0x36,
+    Space: 0xa2, Enter: 13, NumpadEnter: 13, Escape: 27
+  };
+  var keys = [], held = {};
+  function onKey(down, ev) {
+    var k = KEYMAP[ev.code];
+    if (k === undefined) return;
+    ev.preventDefault();
+    if (down === !!held[ev.code]) return;
+    held[ev.code] = down;
+    keys.push([down ? 1 : 0, k]);
+  }
+  window.addEventListener('keydown', function (e) { onKey(true, e); });
+  window.addEventListener('keyup', function (e) { onKey(false, e); });
+  window.addEventListener('blur', function () {
+    Object.keys(held).forEach(function (c) { if (held[c]) { held[c] = false; keys.push([0, KEYMAP[c]]); } });
+  });
+
   window.Module = {
+    dgKeys: keys,
     canvas: document.getElementById('canvas'),
     arguments: args,
     print: function (t) { console.log(t); },

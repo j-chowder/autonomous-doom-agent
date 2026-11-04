@@ -2,7 +2,7 @@
 //
 // The engine is driven one doomgeneric_Tick() per browser frame from
 // emscripten_set_main_loop (requestAnimationFrame); the short engine waits in
-// TryRunTics and the screen wipe go through DG_SleepMs, a bounded spin.
+// TryRunTics and the screen wipe go through DG_SleepMs, which yields (Asyncify).
 
 #include <stdint.h>
 #include <emscripten.h>
@@ -44,14 +44,13 @@ void DG_DrawFrame()
     dg_frame_count++;
 }
 
-// Short bounded spin; never blocks the page for long.
+// Engine waits (tic sync, screen wipe) yield to the browser via Asyncify
+// instead of spinning, so the page keeps painting and answering events.
 void DG_SleepMs(uint32_t ms)
 {
-    if (ms > 5)
-        ms = 5;
-    double end = emscripten_get_now() + ms;
-    while (emscripten_get_now() < end)
-        ;
+    if (ms > 100)
+        ms = 100;
+    emscripten_sleep(ms);
 }
 
 uint32_t DG_GetTicksMs()
@@ -59,11 +58,23 @@ uint32_t DG_GetTicksMs()
     return (uint32_t)emscripten_get_now();
 }
 
+// Pops one queued key event from Module.dgKeys (filled by web/doom-boot.js).
+// Returns (pressed << 8) | doomkey, or -1 when the queue is empty.
+EM_JS(int, dg_pop_key, (void), {
+    var q = Module.dgKeys;
+    if (!q || !q.length) return -1;
+    var e = q.shift();
+    return (e[0] << 8) | e[1];
+});
+
 int DG_GetKey(int *pressed, unsigned char *key)
 {
-    (void)pressed;
-    (void)key;
-    return 0;
+    int v = dg_pop_key();
+    if (v < 0)
+        return 0;
+    *pressed = (v >> 8) & 1;
+    *key = (unsigned char)(v & 0xff);
+    return 1;
 }
 
 EM_JS(void, dg_set_title, (const char *title), {
@@ -75,9 +86,16 @@ void DG_SetWindowTitle(const char *title)
     dg_set_title(title);
 }
 
+// A frame can suspend inside DG_SleepMs; ignore rAF callbacks meanwhile.
+static int in_frame;
+
 static void frame(void)
 {
+    if (in_frame)
+        return;
+    in_frame = 1;
     doomgeneric_Tick();
+    in_frame = 0;
 }
 
 int main(int argc, char **argv)
