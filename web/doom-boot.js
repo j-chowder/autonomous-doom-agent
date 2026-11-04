@@ -25,7 +25,7 @@
 
   // Doom key codes (doomkeys.h) for the supported browser keys.
   var KEYMAP = {
-    ArrowUp: 0xad, ArrowDown: 0xaf, ArrowLeft: 0xac, ArrowRight: 0xae,
+    ArrowUp: 0xaf, ArrowDown: 0xaf, ArrowLeft: 0xac, ArrowRight: 0xae,
     ControlLeft: 0xa3, ControlRight: 0xa3, ShiftLeft: 0x80 + 0x36, ShiftRight: 0x80 + 0x36,
     AltLeft: 0x80 + 0x38, AltRight: 0x80 + 0x38,
     Space: 0xa2, Enter: 13, NumpadEnter: 13, Escape: 27, Tab: 9, Backspace: 0x7f,
