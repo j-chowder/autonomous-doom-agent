@@ -41,7 +41,25 @@
     var m = window.Module;
     if (m && m._dg_push_key) m._dg_push_key(down ? 1 : 0, k);
   }
+  // Web Audio context, created on the first user gesture (autoplay policy).
+  var actx = null;
+  function audioUnlock() {
+    try {
+      if (!actx) {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        actx = new AC();
+      }
+      if (actx.state !== 'running') {
+        var p = actx.resume();
+        if (p && p.catch) p.catch(function () {});
+      }
+    } catch (e) { console.warn('audio unavailable', e); }
+  }
+  window.dgAudioContext = function () { return actx; };
+  window.addEventListener('pointerdown', audioUnlock, true);
   function onKey(down, ev) {
+    audioUnlock();
     var k = KEYMAP[ev.code];
     if (k === undefined) return;
     ev.preventDefault();
