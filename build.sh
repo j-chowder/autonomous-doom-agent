@@ -20,4 +20,4 @@ emcc -O2 -w -I"$ENGINE" -Iplatform "${SRCS[@]}" \
   --preload-file assets/doom1.wad@/doom1.wad
 
 cp build/doom.js build/doom.wasm build/doom.data dist/doom/
-cp web/index.html dist/doom/index.html
+cp -R web/. dist/doom/
