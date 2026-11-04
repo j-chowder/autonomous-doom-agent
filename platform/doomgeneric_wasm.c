@@ -4,8 +4,8 @@
 // (see third_party/doomgeneric/doomgeneric.h). Right now they do nothing,
 // so the engine links but shows nothing and takes no input.
 //
-// There is also no main() yet. How the engine gets started and kept
-// running in a browser is yours to design.
+// main() is a minimal placeholder so the link succeeds; the real loop
+// comes later.
 //
 // Making this behave like Doom in a browser is the project.
 
@@ -17,8 +17,12 @@ void DG_Init()
 {
 }
 
+// Completed DG_DrawFrame calls; read by DG_TEST_GetFrameCount.
+int dg_frame_count = 0;
+
 void DG_DrawFrame()
 {
+    dg_frame_count++;
 }
 
 void DG_SleepMs(uint32_t ms)
@@ -41,4 +45,10 @@ int DG_GetKey(int *pressed, unsigned char *key)
 void DG_SetWindowTitle(const char *title)
 {
     (void)title;
+}
+
+int main(int argc, char **argv)
+{
+    doomgeneric_Create(argc, argv);
+    return 0;
 }
