@@ -1,0 +1,26 @@
+{
+ "approved_by": "jaden",
+ "approved_at": "2026-11-04T09:34:42-0800",
+ "tree_sha256": "47d717364025f23a7cded306d5b72ece18a64a255e3ec06ec0620e5c51f64304",
+ "files": {
+  "tests/doom/trusted/README.md": "ce886d242cd116bdb93213ea032da703feb419d1807f73318b437088b244a439",
+  "tests/doom/trusted/controls.js": "85a39757cc0fa3bb7cba2b2d4d1af8f5c78d5e46c92bbf877ac2e62e416e8789",
+  "tests/doom/trusted/derive.js": "ef428b17c226c79758ee5de34df29bd4d122f6d487ec5bf14930a4d131af11b2",
+  "tests/doom/trusted/groups/audio.js": "6db794718e65dafda71dd9bdadd25a7e2cef1e816a4880ee8a2b43aa0b8192e5",
+  "tests/doom/trusted/groups/boot.js": "ac66c37380d01e3feae81ccf99c69797f4c5904e36902bea1fce9e73f3de43a7",
+  "tests/doom/trusted/groups/build.js": "9a420672fa5032b034a5f655a8646fccff1bdaa5bcaf96c13d76f9a52f79734c",
+  "tests/doom/trusted/groups/input.js": "5a5e9d3fa77b849a0971ca9b5e5e858d50e9e95ab442234441ea454f61933ae6",
+  "tests/doom/trusted/groups/stability.js": "80bd83ad04a7b3601c7822070943e45f99cc694f1d2b1b030932a526747dae6f",
+  "tests/doom/trusted/groups/time.js": "bda0b5c8f5a6c52a8f7e8e3a864dd62cfb1b58e4233588cb73d7746444aedad4",
+  "tests/doom/trusted/groups/video.js": "b3ddacbf531b03609df16b2b3f87848c3ad97dbfb69d24f4d2eae3ad0c6b9a38",
+  "tests/doom/trusted/lib/faults.js": "84f0f42283c09715f08244bc1128deba60b5b3eae257211bedca73bb498ec619",
+  "tests/doom/trusted/lib/model.js": "fc505fa7b6569c0ef489356dfff21674db69665ff795fe3fe5e8274bf58236de",
+  "tests/doom/trusted/lib/site.js": "b30fe49cb3645622d1e13c3662f1cd5115d95a64187717b442452e147cfe35b8",
+  "tests/doom/trusted/lib/util.js": "a78e57084eafcd989cd4a17fa37eabe9fb888f32a032446e14bd0a006579eec9",
+  "tests/doom/trusted/lib/wad.js": "2c1c03b00d6a00b58b78721c005ba04e153ee350ad30dae7d5a2e8a2221cba01",
+  "tests/doom/trusted/lib/wasm.js": "bff196dd70bc8ce96d24c9d8f2c8a17a870e47d2ec9f1d88c74690c60e594e9c",
+  "tests/doom/trusted/main.js": "48c352ba6b261cc51a47aea13701e92bd71dcf4bfd1943bd2eb89efb4d1a62f2",
+  "tests/doom/trusted/run.sh": "d983e950e4f6f850f0fbc283907c153ee6eeb8fd057e8cb6ab667d6611c4ed29",
+  "tests/doom/ACCEPTANCE.md": "818e30c763d58d49805b93c41cd7719341e4fa00b72c713abafae7c43ac5019d"
+ }
+}
