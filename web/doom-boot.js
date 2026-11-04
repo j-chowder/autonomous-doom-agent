@@ -27,25 +27,47 @@
   var KEYMAP = {
     ArrowUp: 0xad, ArrowDown: 0xaf, ArrowLeft: 0xac, ArrowRight: 0xae,
     ControlLeft: 0xa3, ControlRight: 0xa3, ShiftLeft: 0x80 + 0x36, ShiftRight: 0x80 + 0x36,
-    Space: 0xa2, Enter: 13, NumpadEnter: 13, Escape: 27
+    AltLeft: 0x80 + 0x38, AltRight: 0x80 + 0x38,
+    Space: 0xa2, Enter: 13, NumpadEnter: 13, Escape: 27, Tab: 9, Backspace: 0x7f,
+    Minus: 0x2d, Equal: 0x3d, Comma: 0xa0, Period: 0xa1, Pause: 0xff,
+    F1: 0x80 + 0x3b, F2: 0x80 + 0x3c, F3: 0x80 + 0x3d, F4: 0x80 + 0x3e,
+    F5: 0x80 + 0x3f, F6: 0x80 + 0x40, F7: 0x80 + 0x41, F8: 0x80 + 0x42,
+    F9: 0x80 + 0x43, F10: 0x80 + 0x44, F11: 0x80 + 0x57, F12: 0x80 + 0x58
   };
-  var keys = [], held = {};
+  for (var i = 0; i < 26; i++) KEYMAP['Key' + String.fromCharCode(65 + i)] = 97 + i;
+  for (var d = 0; d < 10; d++) KEYMAP['Digit' + d] = 48 + d;
+  var held = {};
+  function push(down, k) {
+    var m = window.Module;
+    if (m && m._dg_push_key) m._dg_push_key(down ? 1 : 0, k);
+  }
   function onKey(down, ev) {
     var k = KEYMAP[ev.code];
     if (k === undefined) return;
     ev.preventDefault();
+    if (down && ev.repeat) return;
     if (down === !!held[ev.code]) return;
     held[ev.code] = down;
-    keys.push([down ? 1 : 0, k]);
+    push(down, k);
+  }
+  function releaseAll() {
+    Object.keys(held).forEach(function (c) {
+      if (held[c]) { held[c] = false; push(false, KEYMAP[c]); }
+    });
   }
   window.addEventListener('keydown', function (e) { onKey(true, e); });
   window.addEventListener('keyup', function (e) { onKey(false, e); });
-  window.addEventListener('blur', function () {
-    Object.keys(held).forEach(function (c) { if (held[c]) { held[c] = false; keys.push([0, KEYMAP[c]]); } });
+  window.addEventListener('blur', releaseAll);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) releaseAll();
   });
+  var cv = document.getElementById('canvas');
+  cv.tabIndex = 0;
+  cv.style.outline = 'none';
+  cv.focus();
+  window.addEventListener('load', function () { cv.focus(); });
 
   window.Module = {
-    dgKeys: keys,
     canvas: document.getElementById('canvas'),
     arguments: args,
     print: function (t) { console.log(t); },

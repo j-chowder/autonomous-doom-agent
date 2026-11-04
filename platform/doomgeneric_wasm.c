@@ -58,22 +58,30 @@ uint32_t DG_GetTicksMs()
     return (uint32_t)emscripten_get_now();
 }
 
-// Pops one queued key event from Module.dgKeys (filled by web/doom-boot.js).
-// Returns (pressed << 8) | doomkey, or -1 when the queue is empty.
-EM_JS(int, dg_pop_key, (void), {
-    var q = Module.dgKeys;
-    if (!q || !q.length) return -1;
-    var e = q.shift();
-    return (e[0] << 8) | e[1];
-});
+// Fixed-size ring of (pressed, doomkey) events, filled by dg_push_key from
+// web/doom-boot.js and drained one event per DG_GetKey call.
+#define KEYQ_SIZE 256
+static struct { unsigned char pressed, key; } keyq[KEYQ_SIZE];
+static unsigned keyq_head, keyq_tail;
+
+EMSCRIPTEN_KEEPALIVE
+void dg_push_key(int pressed, int key)
+{
+    unsigned next = (keyq_head + 1) % KEYQ_SIZE;
+    if (next == keyq_tail)
+        return; // full: drop the newest event
+    keyq[keyq_head].pressed = pressed ? 1 : 0;
+    keyq[keyq_head].key = (unsigned char)key;
+    keyq_head = next;
+}
 
 int DG_GetKey(int *pressed, unsigned char *key)
 {
-    int v = dg_pop_key();
-    if (v < 0)
+    if (keyq_tail == keyq_head)
         return 0;
-    *pressed = (v >> 8) & 1;
-    *key = (unsigned char)(v & 0xff);
+    *pressed = keyq[keyq_tail].pressed;
+    *key = keyq[keyq_tail].key;
+    keyq_tail = (keyq_tail + 1) % KEYQ_SIZE;
     return 1;
 }
 
