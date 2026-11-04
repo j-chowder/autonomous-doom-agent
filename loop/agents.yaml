@@ -1,0 +1,24 @@
+# Claude Code harness agents, one per role. The CLI's own subscription login and model choice apply;
+# Docker Agent toolsets, model routing, budget enforcement and tool approval do NOT apply to harness agents.
+# Role limits (what a role may change) are enforced by the controller after each run, not by this file.
+agents:
+  planner:
+    description: Planner (Claude Code harness). Writes a JSON plan; edits nothing else.
+    harness:
+      type: claude-code
+      effort: high
+  coder:
+    description: Coding agent (Claude Code harness)
+    harness:
+      type: claude-code
+      effort: medium
+  reviewer:
+    description: Independent reviewer (Claude Code harness). Writes a findings file; edits no code.
+    harness:
+      type: claude-code
+      effort: medium
+  tester:
+    description: Independent tester (Claude Code harness). Writes proposed tests; edits no code.
+    harness:
+      type: claude-code
+      effort: medium
