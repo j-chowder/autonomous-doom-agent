@@ -1,0 +1,46 @@
+{
+  "decision": "PASS",
+  "classification": "tests_passed",
+  "base_sha": "18ab36d778963fc86ec003046a2182bcb8edc2fd",
+  "worktree": "/Users/jadenc/Desktop/bse/capstone/build/worktrees/20261104T185606Z-3582b6/T1-a1-a5c556",
+  "test_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+    "run",
+    "--trusted",
+    "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+    "--timeout",
+    "600",
+    "--",
+    "bash",
+    "/trusted/run.sh",
+    "boot"
+  ],
+  "allowed": [
+    "web"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "tests",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore"
+  ],
+  "fingerprint": "2d1904c9c1f911bb9f4b8a06f8c10d0dd967097e",
+  "fingerprint_after": "2d1904c9c1f911bb9f4b8a06f8c10d0dd967097e",
+  "changed": [
+    {
+      "status": "M",
+      "path": "web/index.html"
+    }
+  ],
+  "violations": [],
+  "exit_code": 0,
+  "log": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T185606Z-3582b6/verify/T1-a1-v0/verify.log",
+  "duration_s": 10.476
+}

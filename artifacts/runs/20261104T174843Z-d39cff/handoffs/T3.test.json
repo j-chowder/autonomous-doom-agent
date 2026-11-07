@@ -1,0 +1,8 @@
+{"summary": "Five proposed tests (Python/Playwright, need a prior build.sh; DOOM_DIST overrides dist path). Not executed by the tester: they cover VIDEO-01 a/b/c, TIME-01/02 a/b, and static build/boot regressions.",
+"tests": [
+{"file": "handoff/T3.test.tests/test_video_pixels.py", "purpose": "All canvas alpha 255; colours are PLAYPAL palette entries, better than the R/B-swapped palette; status bar not blank", "criterion": "VIDEO-01.a, VIDEO-01.b"},
+{"file": "handoff/T3.test.tests/test_video_changes.py", "purpose": "Frame count, view angle and canvas pixels change while ArrowLeft is held", "criterion": "VIDEO-01.c"},
+{"file": "handoff/T3.test.tests/test_time_rate.py", "purpose": "10 s tic rate after 2 s warmup within 26.25-43.75, rAF gap <=1000 ms, with and without monsters", "criterion": "TIME-01.a, TIME-02.a"},
+{"file": "handoff/T3.test.tests/test_watchdog.py", "purpose": "Repeated external evaluate calls answer in <1 s over 8 s; tics rise monotonically", "criterion": "TIME-02.b"},
+{"file": "handoff/T3.test.tests/test_static_regressions.py", "purpose": "One wasm, exactly six DG_TEST_ exports, index with 640x400 canvas, data file present", "criterion": "BUILD-01.c/.e regression"}
+]}

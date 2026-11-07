@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "gate": "boot",
+  "command": "run.sh boot",
+  "candidate_sha": null,
+  "test_hash": "9ab967f18e0533a914102c0d041f7d42cdc1253bce179a6413ad349300b45e11",
+  "image_id": null,
+  "wad_sha256": "1d7d43be501e67d927e415e0b8f3e29c3bf33075e859721816f652a526cac771",
+  "browser": "chromium 141.0.7390.37",
+  "started": "2026-11-04T18:52:55.769Z",
+  "finished": "2026-11-04T18:53:02.787Z",
+  "duration_s": 7,
+  "exit_code": 1,
+  "notes": [],
+  "assertions": [
+    {
+      "id": "BUILD-01.a",
+      "status": "PASS",
+      "reason": "bash build.sh exited 0 in 5 s"
+    },
+    {
+      "id": "BUILD-01.b",
+      "status": "PASS",
+      "reason": "emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.18 (fae107463db4d20a276a27ede393048deaeebf76)"
+    },
+    {
+      "id": "BUILD-01.c",
+      "status": "PASS",
+      "reason": "dist/doom/index.html and one wasm (doom.wasm)"
+    },
+    {
+      "id": "BUILD-01.d",
+      "status": "PASS",
+      "reason": "WebAssembly.validate true, 546561 bytes"
+    },
+    {
+      "id": "BUILD-01.e",
+      "status": "PASS",
+      "reason": "six DG_TEST_ getters, no others"
+    },
+    {
+      "id": "LOAD-01.a",
+      "status": "FAIL",
+      "reason": "startup failed before the first tic: {\"path\":\"/doom/doom-missing.js\",\"status\":404,\"type\":\"text/plain\"} (Module._DG_TEST_GetGameTic is not a function)"
+    },
+    {
+      "id": "LOAD-01.b",
+      "status": "ERROR",
+      "reason": "skipped: LOAD-01.a failed"
+    },
+    {
+      "id": "LOAD-01.c",
+      "status": "PASS",
+      "reason": "no page error, abort or crash during startup"
+    },
+    {
+      "id": "WAD-01.a",
+      "status": "FAIL",
+      "reason": "no first tic and the WAD data is unavailable: request for /doom/doom-missing.js failed (404)"
+    },
+    {
+      "id": "WAD-01.b",
+      "status": "FAIL",
+      "reason": "no first tic and the WAD data is unavailable"
+    }
+  ],
+  "measurements": {},
+  "page_events": {
+    "fatal": [],
+    "blocked_network": []
+  },
+  "artifacts": {
+    "logs": [
+      "/out/logs/build.log",
+      "/out/logs/boot.log"
+    ],
+    "screenshots": [
+      "/out/screenshots/boot-nostart.png"
+    ]
+  }
+}

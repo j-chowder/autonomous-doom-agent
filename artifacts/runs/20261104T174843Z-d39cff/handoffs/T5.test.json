@@ -1,0 +1,7 @@
+{"summary": "Four Python proposals (no dist/ exists in this worktree, so only the static source check was run: all PASS; browser tests unrun, need playwright + built dist). Browser tests tap every connection to ctx.destination with an AnalyserNode to prove non-silent output after Control, check context running after a key press with no click, and re-check TIME/VIDEO/INPUT/hook-count regressions with audio active.",
+ "tests": [
+  {"file": "handoff/T5.test.tests/test_wasm_exports.py", "purpose": "Parse wasm export section; exactly the six DG_TEST_ exports.", "criterion": "wasm still exports only the six DG_TEST_ hooks"},
+  {"file": "handoff/T5.test.tests/test_audio_browser.py", "purpose": "AudioContext running after key press; analyser peak >0 after firing; sfx decoded; stress (hold fire, menu, blur) gives no errors.", "criterion": "AUDIO-01.a, AUDIO-01.b, STABILITY-01.a"},
+  {"file": "handoff/T5.test.tests/test_audio_regression.py", "purpose": "With audio active: tic rate 26.25-43.75, rAF gap <=1s, alpha 255, fire uses ammo, forward moves, six hooks only, no pageerror.", "criterion": "TIME-01/02, INPUT-*, VIDEO-01 still pass"},
+  {"file": "handoff/T5.test.tests/test_audio_source.py", "purpose": "Static checks: FEATURE_SOUND built, gesture-only AudioContext, rejection handled, bounds guards, no DG_TEST_ in audio code.", "criterion": "wasm exports only six hooks; no uncaught rejections"}
+ ]}

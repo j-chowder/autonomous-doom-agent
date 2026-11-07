@@ -1,0 +1,42 @@
+{
+  "decision": "PASS",
+  "classification": "tests_passed",
+  "base_sha": "151bc36104c90790a41e4241cd8fee202b2d7a0e",
+  "worktree": "/Users/jadenc/Desktop/bse/capstone/build/worktrees/20261104T174843Z-d39cff/PLAN-1-a2-e0425a",
+  "test_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/Users/jadenc/Desktop/bse/capstone/loop/handoff.py",
+    "check",
+    "planner",
+    "handoff/PLAN-1.json",
+    "--policy",
+    "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/policies/PLAN-1.json"
+  ],
+  "allowed": [
+    "handoff/PLAN-1.json"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "tests",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore"
+  ],
+  "fingerprint": "5f51452d4062db016c0adde73ba22cae661144f5",
+  "fingerprint_after": "5f51452d4062db016c0adde73ba22cae661144f5",
+  "changed": [
+    {
+      "status": "A",
+      "path": "handoff/PLAN-1.json"
+    }
+  ],
+  "violations": [],
+  "exit_code": 0,
+  "log": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/PLAN-1-a2-v0/verify.log",
+  "duration_s": 0.408
+}

@@ -1,0 +1,231 @@
+{
+  "run_id": "20261104T202813Z-ed0024",
+  "status": "complete",
+  "reason": "complete",
+  "objective": "Diagnose and autonomously repair the browser keyboard input regression in the DOOM WebAssembly implementation. Restore correct gameplay keyboard behavior and pass all trusted acceptance tests. Do not modify trusted tests.",
+  "mode": "real",
+  "invocations": 4,
+  "roles": {
+    "planner": {
+      "tasks": 1,
+      "attempts": 2,
+      "agent": "planner"
+    },
+    "web_frontend": {
+      "tasks": 1,
+      "attempts": 1,
+      "agent": "coder"
+    },
+    "reviewer": {
+      "tasks": 1,
+      "attempts": 1,
+      "agent": "reviewer"
+    }
+  },
+  "open_findings": [],
+  "warnings": [],
+  "tasks": {
+    "PLAN-1": {
+      "role": "planner",
+      "status": "VERIFIED",
+      "attempts": 2,
+      "verified_sha": "aa8eaa9ddf2a346dfc087aafc32195a268e0f1c7"
+    },
+    "T1": {
+      "role": "web_frontend",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "c114b65c387a21cc4f4dbaf10a622ad3b67b3b83"
+    },
+    "FINAL.review": {
+      "role": "reviewer",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "2af0ac4a58e16c44673010ae40e854e5aefe7078"
+    }
+  },
+  "accepted_refs": [
+    "refs/loop/accepted/20261104T202813Z-ed0024/FINAL.review 2af0ac4a58e16c44673010ae40e854e5aefe7078",
+    "refs/loop/accepted/20261104T202813Z-ed0024/PLAN-1 aa8eaa9ddf2a346dfc087aafc32195a268e0f1c7",
+    "refs/loop/accepted/20261104T202813Z-ed0024/T1 c114b65c387a21cc4f4dbaf10a622ad3b67b3b83"
+  ],
+  "final_head": "c114b65c387a21cc4f4dbaf10a622ad3b67b3b83",
+  "events": [
+    {
+      "base_sha": "4e56aa8e508e2cd8a7172f9b481cac1e79fabca0",
+      "budgets": {
+        "agent_timeout_s": 1800,
+        "max_attempts": 3,
+        "max_invocations": 40,
+        "max_replans": 1,
+        "max_runtime_s": 5400,
+        "max_tasks": 6,
+        "max_total_runtime_s": 21600,
+        "proposal_timeout_s": 120,
+        "verify_retries": 2,
+        "verify_timeout_s": 3300
+      },
+      "key": "start:20261104T202813Z-ed0024",
+      "mode": "real",
+      "objective": "Diagnose and autonomously repair the browser keyboard input regression in the DOOM WebAssembly implementation. Restore correct gameplay keyboard behavior and pass all trusted acceptance tests. Do not modify trusted tests.",
+      "seq": 2,
+      "task_id": null,
+      "ts": "2026-11-04T20:28:13.433+00:00",
+      "type": "coordinator_started"
+    },
+    {
+      "accepted_sha": null,
+      "attempt": 1,
+      "classification": "test_failed",
+      "decision": "FAIL",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T202813Z-ed0024/verify/PLAN-1-a1-v0",
+      "exit_code": 1,
+      "fingerprint": "63edd2133e7e5aacc6dba881885ba83a7995cbf5",
+      "fingerprint_after": "63edd2133e7e5aacc6dba881885ba83a7995cbf5",
+      "seq": 8,
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T20:28:42.446+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "retry",
+      "attempt": 1,
+      "feedback": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T202813Z-ed0024/feedback/PLAN-1-a1.md",
+      "reason": "verify_fail:test_failed",
+      "seq": 11,
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T20:28:42.941+00:00",
+      "type": "decision"
+    },
+    {
+      "accepted_sha": "aa8eaa9ddf2a346dfc087aafc32195a268e0f1c7",
+      "attempt": 2,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T202813Z-ed0024/verify/PLAN-1-a2-v0",
+      "exit_code": 0,
+      "fingerprint": "aaae2a9b4ed2039b87bb5cf5603f6c2e6612b80c",
+      "fingerprint_after": "aaae2a9b4ed2039b87bb5cf5603f6c2e6612b80c",
+      "seq": 15,
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T20:29:13.011+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 2,
+      "seq": 17,
+      "sha": "aa8eaa9ddf2a346dfc087aafc32195a268e0f1c7",
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T20:29:13.013+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "plan:PLAN-1",
+      "plan": "PLAN-1",
+      "replan": false,
+      "seq": 19,
+      "task_id": null,
+      "tasks": [
+        {
+          "allowed": [
+            "web"
+          ],
+          "id": "T1",
+          "profile": "input",
+          "title": "Fix ArrowUp key mapping in web/doom-boot.js"
+        }
+      ],
+      "ts": "2026-11-04T20:29:13.046+00:00",
+      "type": "plan_admitted",
+      "version": 1
+    },
+    {
+      "accepted_sha": "c114b65c387a21cc4f4dbaf10a622ad3b67b3b83",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T202813Z-ed0024/verify/T1-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "2d1904c9c1f911bb9f4b8a06f8c10d0dd967097e",
+      "fingerprint_after": "2d1904c9c1f911bb9f4b8a06f8c10d0dd967097e",
+      "seq": 25,
+      "task_id": "T1",
+      "ts": "2026-11-04T20:30:51.523+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 27,
+      "sha": "c114b65c387a21cc4f4dbaf10a622ad3b67b3b83",
+      "task_id": "T1",
+      "ts": "2026-11-04T20:30:51.524+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "acc:T1",
+      "profile": "input",
+      "seq": 29,
+      "sha": "c114b65c387a21cc4f4dbaf10a622ad3b67b3b83",
+      "task": "T1",
+      "task_id": null,
+      "ts": "2026-11-04T20:30:51.526+00:00",
+      "type": "task_accepted"
+    },
+    {
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T202813Z-ed0024/verify/FINAL-1",
+      "gate": "final",
+      "head_sha": "c114b65c387a21cc4f4dbaf10a622ad3b67b3b83",
+      "key": "final:1",
+      "seq": 30,
+      "task_id": null,
+      "ts": "2026-11-04T20:36:12.422+00:00",
+      "type": "final_gate"
+    },
+    {
+      "accepted_sha": "2af0ac4a58e16c44673010ae40e854e5aefe7078",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T202813Z-ed0024/verify/FINAL.review-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "062e2b2d50b1964dc8beac22354f7107bad1b191",
+      "fingerprint_after": "062e2b2d50b1964dc8beac22354f7107bad1b191",
+      "seq": 36,
+      "task_id": "FINAL.review",
+      "ts": "2026-11-04T20:36:37.900+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 38,
+      "sha": "2af0ac4a58e16c44673010ae40e854e5aefe7078",
+      "task_id": "FINAL.review",
+      "ts": "2026-11-04T20:36:37.902+00:00",
+      "type": "decision"
+    },
+    {
+      "findings": [],
+      "key": "rev:FINAL.review",
+      "reviewer_task": "FINAL.review",
+      "seq": 40,
+      "subject": "FINAL",
+      "task_id": null,
+      "ts": "2026-11-04T20:36:37.930+00:00",
+      "type": "review_done",
+      "verdict": "pass"
+    }
+  ]
+}

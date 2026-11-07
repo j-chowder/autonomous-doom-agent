@@ -1,0 +1,216 @@
+{
+  "schema": 1,
+  "gate": "input",
+  "command": "run.sh input",
+  "candidate_sha": null,
+  "test_hash": "9ab967f18e0533a914102c0d041f7d42cdc1253bce179a6413ad349300b45e11",
+  "image_id": null,
+  "wad_sha256": "1d7d43be501e67d927e415e0b8f3e29c3bf33075e859721816f652a526cac771",
+  "browser": "chromium 141.0.7390.37",
+  "started": "2026-11-04T20:21:06.758Z",
+  "finished": "2026-11-04T20:22:05.291Z",
+  "duration_s": 59,
+  "exit_code": 1,
+  "notes": [],
+  "assertions": [
+    {
+      "id": "BUILD-01.a",
+      "status": "PASS",
+      "reason": "bash build.sh exited 0 in 6 s"
+    },
+    {
+      "id": "BUILD-01.b",
+      "status": "PASS",
+      "reason": "emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.18 (fae107463db4d20a276a27ede393048deaeebf76)"
+    },
+    {
+      "id": "BUILD-01.c",
+      "status": "PASS",
+      "reason": "dist/doom/index.html and one wasm (doom.wasm)"
+    },
+    {
+      "id": "BUILD-01.d",
+      "status": "PASS",
+      "reason": "WebAssembly.validate true, 546561 bytes"
+    },
+    {
+      "id": "BUILD-01.e",
+      "status": "PASS",
+      "reason": "six DG_TEST_ getters, no others"
+    },
+    {
+      "id": "LOAD-01.a",
+      "status": "PASS",
+      "reason": "first GetGameTic() > 0 (tic 1) after 173 ms"
+    },
+    {
+      "id": "LOAD-01.b",
+      "status": "PASS",
+      "reason": "canvas 640x400 has at least 64 distinct colors"
+    },
+    {
+      "id": "LOAD-01.c",
+      "status": "PASS",
+      "reason": "no page error, abort or crash during startup"
+    },
+    {
+      "id": "WAD-01.a",
+      "status": "PASS",
+      "reason": "first-tic player (1056,-3616) equals E1M1 start THING (1056,-3616)"
+    },
+    {
+      "id": "WAD-01.b",
+      "status": "PASS",
+      "reason": "first-tic view angle 1073741824 equals start angle 90 deg"
+    },
+    {
+      "id": "STABILITY-01.a",
+      "status": "PASS",
+      "reason": "zero crashes, uncaught exceptions, unhandled rejections or aborts over 11 page(s)"
+    },
+    {
+      "id": "DEPLOY-01.a",
+      "status": "PASS",
+      "reason": "/doom/doom.wasm served as application/wasm"
+    },
+    {
+      "id": "DEPLOY-01.b",
+      "status": "PASS",
+      "reason": "LOAD-01.a and WAD-01.a hold under /doom/ with no failed asset requests"
+    },
+    {
+      "id": "VIDEO-01.a",
+      "status": "PASS",
+      "reason": "all 256000 canvas pixels have alpha 255"
+    },
+    {
+      "id": "VIDEO-01.b",
+      "status": "PASS",
+      "reason": "view-in-palette 1.0000 (>= 0.99), status-bar background 1.0000 (>= 0.99), HUD number glyphs 1.0000 (>= 0.95, shift 0,0), tol 2"
+    },
+    {
+      "id": "VIDEO-01.c",
+      "status": "PASS",
+      "reason": "frames +30 over 20 tics (need >= 5), view pixels changed 74.2% (need >= 5%)"
+    },
+    {
+      "id": "TIME-01.a",
+      "status": "PASS",
+      "reason": "350 tics: 34.99/s on the unfaulted clock, 34.99/s on page performance.now; accepted 26.25 to 43.75"
+    },
+    {
+      "id": "TIME-02.a",
+      "status": "PASS",
+      "reason": "largest requestAnimationFrame gap 36 ms <= 1000 ms (600 callbacks in 10 s)"
+    },
+    {
+      "id": "TIME-02.b",
+      "status": "PASS",
+      "reason": "40 watchdog pings every 250 ms, all answered, max latency 5 ms (timeout 1000 ms)"
+    },
+    {
+      "id": "INPUT-01.a",
+      "status": "FAIL",
+      "reason": "ArrowUp for 30 tics moved -48.0 forward, -0.0 sideways; need 75.0 to 260.5"
+    },
+    {
+      "id": "INPUT-01.b",
+      "status": "PASS",
+      "reason": "ArrowDown for 8 tics moved -22.8 (negative = backward), -0.0 sideways; need <= -5.2"
+    },
+    {
+      "id": "INPUT-01.c",
+      "status": "PASS",
+      "reason": "ArrowLeft for 20 tics turned 61.5 deg in the expected direction; need 30.6 to 86.1"
+    },
+    {
+      "id": "INPUT-01.d",
+      "status": "PASS",
+      "reason": "ArrowRight for 20 tics turned 61.5 deg in the expected direction; need 30.6 to 86.1"
+    },
+    {
+      "id": "INPUT-01.e",
+      "status": "PASS",
+      "reason": "Control for 40 tics: ammo 50 -> 47 (3 shots; expected 1 to 3)"
+    },
+    {
+      "id": "INPUT-01.f",
+      "status": "FAIL",
+      "reason": "walk reference moved only -48.0 (need >= 75.0), so the run ratio cannot be formed"
+    },
+    {
+      "id": "INPUT-02.a",
+      "status": "ERROR",
+      "reason": "skipped: INPUT-01.a failed"
+    },
+    {
+      "id": "INPUT-03.a",
+      "status": "PASS",
+      "reason": "scroll after ArrowDown/ArrowUp/Space/ArrowRight/ArrowLeft = (0,0); preventDefault missing for: none"
+    },
+    {
+      "id": "INPUT-03.b",
+      "status": "PASS",
+      "reason": "activeElement CANVAS#canvas -> CANVAS#canvas, document.hasFocus() true -> true"
+    },
+    {
+      "id": "INPUT-03.c",
+      "status": "ERROR",
+      "reason": "skipped: INPUT-01.a failed"
+    }
+  ],
+  "measurements": {
+    "LOAD-01.a": {
+      "startupMs": 173
+    },
+    "VIDEO-01.b": {
+      "view": 1,
+      "bar": 1,
+      "widget": 1,
+      "shift": "0,0"
+    },
+    "TIME-01.a": {
+      "windowMs": 10000,
+      "dTic": 350,
+      "dRefSec": 10.002999999999997,
+      "dPageSec": 10.002999999999997,
+      "rateRef": 34.989503149055295,
+      "ratePage": 34.989503149055295,
+      "wallMs": 10143
+    },
+    "TIME-02.a": {
+      "maxGapMs": 36.099999999998545,
+      "rafCallbacks": 600
+    },
+    "TIME-02.b": {
+      "pings": 40,
+      "timeouts": 0,
+      "maxLatencyMs": 5
+    }
+  },
+  "page_events": {
+    "fatal": [],
+    "blocked_network": []
+  },
+  "artifacts": {
+    "logs": [
+      "/out/logs/build.log",
+      "/out/logs/boot.log",
+      "/out/logs/stability-short.log",
+      "/out/logs/video.log",
+      "/out/logs/time-10s.log",
+      "/out/logs/in01-forward.log",
+      "/out/logs/in01-back.log",
+      "/out/logs/in01-turn.log",
+      "/out/logs/in01-fire.log",
+      "/out/logs/in01-walk.log",
+      "/out/logs/in01-run.log",
+      "/out/logs/in03-page.log"
+    ],
+    "screenshots": [
+      "/out/screenshots/boot-boot.png",
+      "/out/screenshots/video-turned.png",
+      "/out/screenshots/time-10s-end.png"
+    ]
+  }
+}

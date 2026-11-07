@@ -17,3 +17,18 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# Local run output (curated evidence is committed under artifacts/)
+artifacts/state/
+artifacts/events.jsonl
+artifacts/archive/
+artifacts/sandbox/
+artifacts/runs/*/logs/
+artifacts/runs/*/preserved/
+artifacts/sandbox-runs/*/work/
+artifacts/sandbox-runs/*/logs/
+artifacts/doom/baseline/
+artifacts/doom/*.log
+deliverables/
+*.zip
+.claude/

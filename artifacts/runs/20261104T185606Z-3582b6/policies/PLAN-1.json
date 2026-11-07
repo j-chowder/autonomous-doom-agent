@@ -1,0 +1,59 @@
+{
+  "max_tasks": 6,
+  "allowed_roots": [
+    "platform",
+    "web",
+    "build.sh",
+    "build",
+    "dist"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "tests",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore"
+  ],
+  "profiles": [
+    "audio",
+    "boot",
+    "build",
+    "final",
+    "input",
+    "m1",
+    "time",
+    "video"
+  ],
+  "used_ids": [],
+  "coder_roles": {
+    "wasm_platform": {
+      "allowed_roots": [
+        "platform",
+        "build.sh",
+        "build",
+        "dist"
+      ]
+    },
+    "web_frontend": {
+      "allowed_roots": [
+        "web",
+        "build.sh",
+        "dist"
+      ]
+    },
+    "integrator": {
+      "allowed_roots": [
+        "platform",
+        "web",
+        "build.sh",
+        "build",
+        "dist"
+      ]
+    }
+  }
+}

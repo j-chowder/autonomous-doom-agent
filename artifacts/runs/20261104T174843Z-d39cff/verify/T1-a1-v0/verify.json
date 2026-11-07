@@ -1,0 +1,57 @@
+{
+  "decision": "PASS",
+  "classification": "tests_passed",
+  "base_sha": "151bc36104c90790a41e4241cd8fee202b2d7a0e",
+  "worktree": "/Users/jadenc/Desktop/bse/capstone/build/worktrees/20261104T174843Z-d39cff/T1-a1-642f17",
+  "test_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+    "run",
+    "--trusted",
+    "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+    "--timeout",
+    "600",
+    "--",
+    "bash",
+    "/trusted/run.sh",
+    "build"
+  ],
+  "allowed": [
+    "platform",
+    "build.sh",
+    "build",
+    "dist"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "tests",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore"
+  ],
+  "fingerprint": "09879124085c43db0847e48755596c9a83938400",
+  "fingerprint_after": "09879124085c43db0847e48755596c9a83938400",
+  "changed": [
+    {
+      "status": "A",
+      "path": "build.sh"
+    },
+    {
+      "status": "A",
+      "path": "platform/dg_test_hooks.c"
+    },
+    {
+      "status": "M",
+      "path": "platform/doomgeneric_wasm.c"
+    }
+  ],
+  "violations": [],
+  "exit_code": 0,
+  "log": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T1-a1-v0/verify.log",
+  "duration_s": 6.314
+}

@@ -1,0 +1,8 @@
+{"summary": "Five proposed tests for gate build. test_hooks_static.py runs anywhere and passed. The other four need emcc 4.0.18 (run in the emsdk image) and print SKIP when it is absent. emcc is not installed on this host, so the build tests were never executed. They build in a temp copy, leaving the tree untouched.",
+ "tests": [
+  {"file": "handoff/T1.test.tests/test_hooks_static.py", "purpose": "Source discipline: DG_TEST_ names only in dg_test_hooks.c, exactly six, dg_frame_count owned by the platform, build.sh cleans dist/build and uses no network commands", "criterion": "six hooks and no others; offline build"},
+  {"file": "handoff/T1.test.tests/test_build_clean.py", "purpose": "build.sh exits 0 on a tree seeded with stale dist/build, removes the stale files, produces index.html and exactly one wasm; emcc is 4.0.18", "criterion": "clean build exit 0, index.html, one wasm, emcc 4.0.18"},
+  {"file": "handoff/T1.test.tests/test_wasm_exports.py", "purpose": "Parses the wasm export section: exactly the six DG_TEST_ exports; WebAssembly.validate via node", "criterion": "wasm validates, exports exactly six hooks"},
+  {"file": "handoff/T1.test.tests/test_dist_self_contained.py", "purpose": "dist/doom has .js and the WAD .data; index.html has canvas#canvas and relative script src that exist (subpath-safe)", "criterion": "dist/doom complete (regression/edge for later gates)"},
+  {"file": "handoff/T1.test.tests/_common.py", "purpose": "Helper module: temp-copy build, wasm export parser", "criterion": "support"}
+ ]}

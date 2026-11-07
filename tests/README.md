@@ -1,11 +1,9 @@
-# Verification
+# Tests
 
-Keep verification code here, including browser checks, fixtures, and tests
-for the loop itself. You design the checks; no test suite is provided.
-
-See [the acceptance criteria and evidence requirements](../README.md#evaluate-the-system-you-built).
-Document how to run your checks and what each one establishes.
-
-Save test results, logs, screenshots, and recordings in `artifacts/`.
-Keep acceptance checks outside the coder's write permissions using your
-sandbox/tool configuration; a folder name alone does not enforce access.
+| Path | What it checks |
+|---|---|
+| `test_loop_*.py`, `test_sandbox_verify.py` | The loop itself, with scripted fake agents (`fake_*.py`). Run: `python3 -m unittest discover -s tests -p "test_*.py"` |
+| `demo_*.py` | Runnable demonstrations of each loop stage |
+| `doom/ACCEPTANCE.md` | The acceptance contract: criteria, gates, negative controls |
+| `doom/trusted/` | Frozen browser tests (Playwright). Hashes in `doom/frozen.json`. Run inside the toolchain image: `bash tests/doom/trusted/run.sh GATE` |
+| `doom/QA-PROVENANCE.md` | How the trusted tests were written, reviewed and recovered |

@@ -1,0 +1,1086 @@
+{
+  "run_id": "20261104T174843Z-d39cff",
+  "status": "complete",
+  "reason": "complete",
+  "objective": "Port the supplied doomgeneric engine to WebAssembly so DOOM Episode 1 runs in a browser from a static website, using the supplied shareware WAD. READ tests/doom/ACCEPTANCE.md FIRST: it defines the build and serve interface (build.sh -> dist/doom/), the six read-only test hooks (platform/dg_test_hooks.c), the criteria and the cumulative verification gates. Order the plan by gate: build, boot, m1, video, time, input, audio, final. A task's profile is the gate that proves it; later gates include earlier ones. Milestone 1 is gate m1. There are 8 gates but at most 6 tasks per plan: COMBINE adjacent gate stages into one task (for example build+boot, or time+input) and give the task the HIGHEST gate it covers as its profile. Keep tasks in gate order; never skip ahead. The controller runs gate final itself after the last task, so no task needs profile final; use it only for a task that repairs something only that gate finds.",
+  "mode": "real",
+  "invocations": 19,
+  "roles": {
+    "planner": {
+      "tasks": 1,
+      "attempts": 2,
+      "agent": "planner"
+    },
+    "wasm_platform": {
+      "tasks": 1,
+      "attempts": 1,
+      "agent": "coder"
+    },
+    "reviewer": {
+      "tasks": 6,
+      "attempts": 6,
+      "agent": "reviewer"
+    },
+    "tester": {
+      "tasks": 5,
+      "attempts": 5,
+      "agent": "tester"
+    },
+    "integrator": {
+      "tasks": 4,
+      "attempts": 5,
+      "agent": "coder"
+    }
+  },
+  "open_findings": [],
+  "warnings": [],
+  "tasks": {
+    "PLAN-1": {
+      "role": "planner",
+      "status": "VERIFIED",
+      "attempts": 2,
+      "verified_sha": "158493ec3f7033c6025ce008d6d94170ff09148d"
+    },
+    "T1": {
+      "role": "wasm_platform",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "257111c44d0e221a6d157277dbd6847683d38183"
+    },
+    "T1.review": {
+      "role": "reviewer",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "11fe56d090741b641a9ef039b57144adaf855954"
+    },
+    "T1.test": {
+      "role": "tester",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "c141456e8f721c5945c5e7c73f4cc8fb436364e3"
+    },
+    "T2": {
+      "role": "integrator",
+      "status": "VERIFIED",
+      "attempts": 2,
+      "verified_sha": "413cef1fa805521b1c4abda39e5213641d3467e3"
+    },
+    "T2.review": {
+      "role": "reviewer",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "5209c02e654d37a96efb024aadaa83314bfef55f"
+    },
+    "T2.test": {
+      "role": "tester",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "b28b37160d55ca256501658f7a1bf5e004eefd58"
+    },
+    "T3": {
+      "role": "integrator",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "85abac577a4bbfead86da82a2060c9bfa1f9b048"
+    },
+    "T3.review": {
+      "role": "reviewer",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "674744a8836e29cc1643bfe1459ce626bfb2c6b1"
+    },
+    "T3.test": {
+      "role": "tester",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "e247ce6bd8f78684b5998330786cf378f4f0d71a"
+    },
+    "T4": {
+      "role": "integrator",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "eed9c64fd8084d82d7e79c9039948f00ded74918"
+    },
+    "T4.review": {
+      "role": "reviewer",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "cd9b9d2c68ce9d7563e098f569a275e4d6bf6c8a"
+    },
+    "T4.test": {
+      "role": "tester",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "3b22149a13c1d35da2e6718c9a86fb54eaf8f1ac"
+    },
+    "T5": {
+      "role": "integrator",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "a90bc69a3c66e4c93779d8739c61bdadacfc11a4"
+    },
+    "T5.review": {
+      "role": "reviewer",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "c9e32fbba7345f8733f32b06ee4ebb9bb365c898"
+    },
+    "T5.test": {
+      "role": "tester",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "ed246a3b5bb74d8484fe19f632e6dc6c59140492"
+    },
+    "FINAL.review": {
+      "role": "reviewer",
+      "status": "VERIFIED",
+      "attempts": 1,
+      "verified_sha": "8f50c885ede159fe0c5380e2c0c9bcc7ba35547c"
+    }
+  },
+  "accepted_refs": [
+    "refs/loop/accepted/20261104T174843Z-d39cff/FINAL.review 8f50c885ede159fe0c5380e2c0c9bcc7ba35547c",
+    "refs/loop/accepted/20261104T174843Z-d39cff/PLAN-1 158493ec3f7033c6025ce008d6d94170ff09148d",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T1 257111c44d0e221a6d157277dbd6847683d38183",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T1.review 11fe56d090741b641a9ef039b57144adaf855954",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T1.test c141456e8f721c5945c5e7c73f4cc8fb436364e3",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T2 413cef1fa805521b1c4abda39e5213641d3467e3",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T2.review 5209c02e654d37a96efb024aadaa83314bfef55f",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T2.test b28b37160d55ca256501658f7a1bf5e004eefd58",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T3 85abac577a4bbfead86da82a2060c9bfa1f9b048",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T3.review 674744a8836e29cc1643bfe1459ce626bfb2c6b1",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T3.test e247ce6bd8f78684b5998330786cf378f4f0d71a",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T4 eed9c64fd8084d82d7e79c9039948f00ded74918",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T4.review cd9b9d2c68ce9d7563e098f569a275e4d6bf6c8a",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T4.test 3b22149a13c1d35da2e6718c9a86fb54eaf8f1ac",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T5 a90bc69a3c66e4c93779d8739c61bdadacfc11a4",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T5.review c9e32fbba7345f8733f32b06ee4ebb9bb365c898",
+    "refs/loop/accepted/20261104T174843Z-d39cff/T5.test ed246a3b5bb74d8484fe19f632e6dc6c59140492"
+  ],
+  "final_head": "a90bc69a3c66e4c93779d8739c61bdadacfc11a4",
+  "events": [
+    {
+      "base_sha": "151bc36104c90790a41e4241cd8fee202b2d7a0e",
+      "budgets": {
+        "agent_timeout_s": 1800,
+        "max_attempts": 3,
+        "max_invocations": 40,
+        "max_replans": 1,
+        "max_runtime_s": 5400,
+        "max_tasks": 6,
+        "max_total_runtime_s": 21600,
+        "proposal_timeout_s": 120,
+        "verify_retries": 2,
+        "verify_timeout_s": 3300
+      },
+      "key": "start:20261104T174843Z-d39cff",
+      "mode": "real",
+      "objective": "Port the supplied doomgeneric engine to WebAssembly so DOOM Episode 1 runs in a browser from a static website, using the supplied shareware WAD. READ tests/doom/ACCEPTANCE.md FIRST: it defines the build and serve interface (build.sh -> dist/doom/), the six read-only test hooks (platform/dg_test_hooks.c), the criteria and the cumulative verification gates. Order the plan by gate: build, boot, m1, video, time, input, audio, final. A task's profile is the gate that proves it; later gates include earlier ones. Milestone 1 is gate m1. There are 8 gates but at most 6 tasks per plan: COMBINE adjacent gate stages into one task (for example build+boot, or time+input) and give the task the HIGHEST gate it covers as its profile. Keep tasks in gate order; never skip ahead. The controller runs gate final itself after the last task, so no task needs profile final; use it only for a task that repairs something only that gate finds.",
+      "seq": 2,
+      "task_id": null,
+      "ts": "2026-11-04T17:48:43.457+00:00",
+      "type": "coordinator_started"
+    },
+    {
+      "accepted_sha": null,
+      "attempt": 1,
+      "classification": "test_failed",
+      "decision": "FAIL",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/PLAN-1-a1-v0",
+      "exit_code": 1,
+      "fingerprint": "40d6342b0a0f1b47e41e51469f7251a09c8230a0",
+      "fingerprint_after": "40d6342b0a0f1b47e41e51469f7251a09c8230a0",
+      "seq": 8,
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T17:54:20.292+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "retry",
+      "attempt": 1,
+      "feedback": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/feedback/PLAN-1-a1.md",
+      "reason": "verify_fail:test_failed",
+      "seq": 11,
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T17:54:20.646+00:00",
+      "type": "decision"
+    },
+    {
+      "accepted_sha": "158493ec3f7033c6025ce008d6d94170ff09148d",
+      "attempt": 2,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/PLAN-1-a2-v0",
+      "exit_code": 0,
+      "fingerprint": "5f51452d4062db016c0adde73ba22cae661144f5",
+      "fingerprint_after": "5f51452d4062db016c0adde73ba22cae661144f5",
+      "seq": 15,
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T17:55:41.787+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 2,
+      "seq": 17,
+      "sha": "158493ec3f7033c6025ce008d6d94170ff09148d",
+      "task_id": "PLAN-1",
+      "ts": "2026-11-04T17:55:41.788+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "plan:PLAN-1",
+      "plan": "PLAN-1",
+      "replan": false,
+      "seq": 19,
+      "task_id": null,
+      "tasks": [
+        {
+          "allowed": [
+            "platform",
+            "build.sh",
+            "build",
+            "dist"
+          ],
+          "id": "T1",
+          "profile": "build",
+          "title": "Build pipeline and six DG_TEST_ hooks (gate build)"
+        },
+        {
+          "allowed": [
+            "platform",
+            "web",
+            "build.sh",
+            "build",
+            "dist"
+          ],
+          "id": "T2",
+          "profile": "m1",
+          "title": "Boot E1M1 in browser, WAD packaging and subpath deploy (gates boot+m1)"
+        },
+        {
+          "allowed": [
+            "platform",
+            "web",
+            "build.sh",
+            "build",
+            "dist"
+          ],
+          "id": "T3",
+          "profile": "time",
+          "title": "Correct video output and steady 35 Hz timing with heartbeat (gates video+time)"
+        },
+        {
+          "allowed": [
+            "platform",
+            "web",
+            "build.sh",
+            "build",
+            "dist"
+          ],
+          "id": "T4",
+          "profile": "input",
+          "title": "Keyboard input: move, turn, fire, run, release, no page side effects (gate input)"
+        },
+        {
+          "allowed": [
+            "platform",
+            "web",
+            "build.sh",
+            "build",
+            "dist"
+          ],
+          "id": "T5",
+          "profile": "audio",
+          "title": "Web Audio sound effects from the WAD (gate audio)"
+        }
+      ],
+      "ts": "2026-11-04T17:55:41.812+00:00",
+      "type": "plan_admitted",
+      "version": 1
+    },
+    {
+      "accepted_sha": "257111c44d0e221a6d157277dbd6847683d38183",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T1-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "09879124085c43db0847e48755596c9a83938400",
+      "fingerprint_after": "09879124085c43db0847e48755596c9a83938400",
+      "seq": 25,
+      "task_id": "T1",
+      "ts": "2026-11-04T17:56:44.261+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 27,
+      "sha": "257111c44d0e221a6d157277dbd6847683d38183",
+      "task_id": "T1",
+      "ts": "2026-11-04T17:56:44.262+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "acc:T1",
+      "profile": "build",
+      "seq": 29,
+      "sha": "257111c44d0e221a6d157277dbd6847683d38183",
+      "task": "T1",
+      "task_id": null,
+      "ts": "2026-11-04T17:56:44.263+00:00",
+      "type": "task_accepted"
+    },
+    {
+      "accepted_sha": "11fe56d090741b641a9ef039b57144adaf855954",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T1.review-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "282b8dbd2f965c07fbb542f5598fd3f3d9d85d60",
+      "fingerprint_after": "282b8dbd2f965c07fbb542f5598fd3f3d9d85d60",
+      "seq": 35,
+      "task_id": "T1.review",
+      "ts": "2026-11-04T17:57:09.821+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 37,
+      "sha": "11fe56d090741b641a9ef039b57144adaf855954",
+      "task_id": "T1.review",
+      "ts": "2026-11-04T17:57:09.822+00:00",
+      "type": "decision"
+    },
+    {
+      "findings": [
+        {
+          "criterion": "Robustness (not an ACCEPTANCE item)",
+          "evidence": "build.sh:14 `emcc -O2 -w ...`",
+          "id": "F1",
+          "severity": "minor"
+        },
+        {
+          "criterion": "Section 3.5 (page starts the engine by itself)",
+          "evidence": "main() calls doomgeneric_Create and returns 0",
+          "id": "F2",
+          "severity": "minor"
+        }
+      ],
+      "key": "rev:T1.review",
+      "reviewer_task": "T1.review",
+      "seq": 39,
+      "subject": "T1",
+      "task_id": null,
+      "ts": "2026-11-04T17:57:09.851+00:00",
+      "type": "review_done",
+      "verdict": "pass"
+    },
+    {
+      "accepted_sha": "c141456e8f721c5945c5e7c73f4cc8fb436364e3",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T1.test-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "473ffc37411a4b79bf76ac05c6c0090903948856",
+      "fingerprint_after": "473ffc37411a4b79bf76ac05c6c0090903948856",
+      "seq": 45,
+      "task_id": "T1.test",
+      "ts": "2026-11-04T17:58:09.418+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 47,
+      "sha": "c141456e8f721c5945c5e7c73f4cc8fb436364e3",
+      "task_id": "T1.test",
+      "ts": "2026-11-04T17:58:09.420+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "tst:T1.test",
+      "proposals": [
+        {
+          "file": "handoff/T1.test.tests/test_hooks_static.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T1.test.tests/test_build_clean.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T1.test.tests/test_wasm_exports.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T1.test.tests/test_dist_self_contained.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T1.test.tests/_common.py",
+          "result": "not_run"
+        }
+      ],
+      "seq": 49,
+      "subject": "T1",
+      "task_id": null,
+      "tester_task": "T1.test",
+      "ts": "2026-11-04T17:58:09.448+00:00",
+      "type": "tester_evidence"
+    },
+    {
+      "accepted_sha": null,
+      "attempt": 1,
+      "classification": "test_failed",
+      "decision": "FAIL",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T2-a1-v0",
+      "exit_code": 1,
+      "fingerprint": "c4eea0d4d07a439cc5bed91e946a80ebc4d670f8",
+      "fingerprint_after": "c4eea0d4d07a439cc5bed91e946a80ebc4d670f8",
+      "seq": 55,
+      "task_id": "T2",
+      "ts": "2026-11-04T17:59:41.154+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "retry",
+      "attempt": 1,
+      "feedback": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/feedback/T2-a1.md",
+      "reason": "verify_fail:test_failed",
+      "seq": 58,
+      "task_id": "T2",
+      "ts": "2026-11-04T17:59:41.477+00:00",
+      "type": "decision"
+    },
+    {
+      "accepted_sha": "413cef1fa805521b1c4abda39e5213641d3467e3",
+      "attempt": 2,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T2-a2-v0",
+      "exit_code": 0,
+      "fingerprint": "727e4ea411d5fa3e92c28e7726fd4a19c637ccf6",
+      "fingerprint_after": "727e4ea411d5fa3e92c28e7726fd4a19c637ccf6",
+      "seq": 62,
+      "task_id": "T2",
+      "ts": "2026-11-04T18:02:04.669+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 2,
+      "seq": 64,
+      "sha": "413cef1fa805521b1c4abda39e5213641d3467e3",
+      "task_id": "T2",
+      "ts": "2026-11-04T18:02:04.670+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "acc:T2",
+      "profile": "m1",
+      "seq": 66,
+      "sha": "413cef1fa805521b1c4abda39e5213641d3467e3",
+      "task": "T2",
+      "task_id": null,
+      "ts": "2026-11-04T18:02:04.671+00:00",
+      "type": "task_accepted"
+    },
+    {
+      "accepted_sha": "5209c02e654d37a96efb024aadaa83314bfef55f",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T2.review-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "ce4581cdd7f2c8b7dc1a934b47cd8db52eb04f44",
+      "fingerprint_after": "ce4581cdd7f2c8b7dc1a934b47cd8db52eb04f44",
+      "seq": 72,
+      "task_id": "T2.review",
+      "ts": "2026-11-04T18:02:26.481+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 74,
+      "sha": "5209c02e654d37a96efb024aadaa83314bfef55f",
+      "task_id": "T2.review",
+      "ts": "2026-11-04T18:02:26.483+00:00",
+      "type": "decision"
+    },
+    {
+      "findings": [
+        {
+          "criterion": "No uncaught exceptions; surface fatal errors on the page",
+          "evidence": "web/doom-boot.js:36-50 only hooks Module.onExit and Module.onAbort; there is no window 'error' or 'unhandledrejection' listener",
+          "id": "F1",
+          "severity": "minor"
+        },
+        {
+          "criterion": "Robust preload under a subpath",
+          "evidence": "web/doom-boot.js:38-47 uses a synchronous XHR with a binary-string conversion for doom.data",
+          "id": "F2",
+          "severity": "minor"
+        },
+        {
+          "criterion": "Warp query support",
+          "evidence": "web/doom-boot.js:9-13",
+          "id": "F3",
+          "severity": "minor"
+        }
+      ],
+      "key": "rev:T2.review",
+      "reviewer_task": "T2.review",
+      "seq": 76,
+      "subject": "T2",
+      "task_id": null,
+      "ts": "2026-11-04T18:02:26.512+00:00",
+      "type": "review_done",
+      "verdict": "pass"
+    },
+    {
+      "accepted_sha": "b28b37160d55ca256501658f7a1bf5e004eefd58",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T2.test-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "0b72bd64ef0a3fb9af25edda5c5390036df42a9d",
+      "fingerprint_after": "0b72bd64ef0a3fb9af25edda5c5390036df42a9d",
+      "seq": 82,
+      "task_id": "T2.test",
+      "ts": "2026-11-04T18:03:32.911+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 84,
+      "sha": "b28b37160d55ca256501658f7a1bf5e004eefd58",
+      "task_id": "T2.test",
+      "ts": "2026-11-04T18:03:32.913+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "tst:T2.test",
+      "proposals": [
+        {
+          "file": "handoff/T2.test.tests/test_static_source.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T2.test.tests/test_wad_playerstart.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T2.test.tests/test_dist_subpath.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T2.test.tests/test_browser_boot.py",
+          "result": "not_run"
+        }
+      ],
+      "seq": 86,
+      "subject": "T2",
+      "task_id": null,
+      "tester_task": "T2.test",
+      "ts": "2026-11-04T18:03:32.948+00:00",
+      "type": "tester_evidence"
+    },
+    {
+      "accepted_sha": "85abac577a4bbfead86da82a2060c9bfa1f9b048",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T3-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "f503a6d7724dc796b6e4df773d49076a03096874",
+      "fingerprint_after": "f503a6d7724dc796b6e4df773d49076a03096874",
+      "seq": 92,
+      "task_id": "T3",
+      "ts": "2026-11-04T18:06:51.525+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 94,
+      "sha": "85abac577a4bbfead86da82a2060c9bfa1f9b048",
+      "task_id": "T3",
+      "ts": "2026-11-04T18:06:51.526+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "acc:T3",
+      "profile": "time",
+      "seq": 96,
+      "sha": "85abac577a4bbfead86da82a2060c9bfa1f9b048",
+      "task": "T3",
+      "task_id": null,
+      "ts": "2026-11-04T18:06:51.527+00:00",
+      "type": "task_accepted"
+    },
+    {
+      "accepted_sha": "674744a8836e29cc1643bfe1459ce626bfb2c6b1",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T3.review-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "d2ce5d7e4cf4ca844f8e56539c3c27c10a9d01c8",
+      "fingerprint_after": "d2ce5d7e4cf4ca844f8e56539c3c27c10a9d01c8",
+      "seq": 102,
+      "task_id": "T3.review",
+      "ts": "2026-11-04T18:07:11.753+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 104,
+      "sha": "674744a8836e29cc1643bfe1459ce626bfb2c6b1",
+      "task_id": "T3.review",
+      "ts": "2026-11-04T18:07:11.754+00:00",
+      "type": "decision"
+    },
+    {
+      "findings": [
+        {
+          "criterion": "Scope: task covers video+time only",
+          "evidence": "git diff HEAD~1 HEAD: adds KEYMAP/keydown handlers and DG_GetKey/dg_pop_key in platform/doomgeneric_wasm.c",
+          "id": "F1",
+          "severity": "minor"
+        },
+        {
+          "criterion": "Robustness of timing (35 Hz) under Asyncify",
+          "evidence": "platform/doomgeneric_wasm.c:89-98 and DG_SleepMs uses emscripten_sleep (setTimeout-based)",
+          "id": "F2",
+          "severity": "minor"
+        }
+      ],
+      "key": "rev:T3.review",
+      "reviewer_task": "T3.review",
+      "seq": 106,
+      "subject": "T3",
+      "task_id": null,
+      "ts": "2026-11-04T18:07:11.783+00:00",
+      "type": "review_done",
+      "verdict": "pass"
+    },
+    {
+      "accepted_sha": "e247ce6bd8f78684b5998330786cf378f4f0d71a",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T3.test-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "bafe6b4eb5079ed61b2041e17c717b2288cbf5ce",
+      "fingerprint_after": "bafe6b4eb5079ed61b2041e17c717b2288cbf5ce",
+      "seq": 112,
+      "task_id": "T3.test",
+      "ts": "2026-11-04T18:08:04.500+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 114,
+      "sha": "e247ce6bd8f78684b5998330786cf378f4f0d71a",
+      "task_id": "T3.test",
+      "ts": "2026-11-04T18:08:04.504+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "tst:T3.test",
+      "proposals": [
+        {
+          "file": "handoff/T3.test.tests/test_video_pixels.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T3.test.tests/test_video_changes.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T3.test.tests/test_time_rate.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T3.test.tests/test_watchdog.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T3.test.tests/test_static_regressions.py",
+          "result": "not_run"
+        }
+      ],
+      "seq": 116,
+      "subject": "T3",
+      "task_id": null,
+      "tester_task": "T3.test",
+      "ts": "2026-11-04T18:08:04.542+00:00",
+      "type": "tester_evidence"
+    },
+    {
+      "accepted_sha": "eed9c64fd8084d82d7e79c9039948f00ded74918",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T4-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "c27e5fbe17f6b4f59dcc859ee2dee9a4e245840c",
+      "fingerprint_after": "c27e5fbe17f6b4f59dcc859ee2dee9a4e245840c",
+      "seq": 122,
+      "task_id": "T4",
+      "ts": "2026-11-04T18:10:03.267+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 124,
+      "sha": "eed9c64fd8084d82d7e79c9039948f00ded74918",
+      "task_id": "T4",
+      "ts": "2026-11-04T18:10:03.269+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "acc:T4",
+      "profile": "input",
+      "seq": 126,
+      "sha": "eed9c64fd8084d82d7e79c9039948f00ded74918",
+      "task": "T4",
+      "task_id": null,
+      "ts": "2026-11-04T18:10:03.271+00:00",
+      "type": "task_accepted"
+    },
+    {
+      "accepted_sha": "cd9b9d2c68ce9d7563e098f569a275e4d6bf6c8a",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T4.review-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "f91d0890a005f180c4612b734e403c3a304a460c",
+      "fingerprint_after": "f91d0890a005f180c4612b734e403c3a304a460c",
+      "seq": 132,
+      "task_id": "T4.review",
+      "ts": "2026-11-04T18:10:23.924+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 134,
+      "sha": "cd9b9d2c68ce9d7563e098f569a275e4d6bf6c8a",
+      "task_id": "T4.review",
+      "ts": "2026-11-04T18:10:23.926+00:00",
+      "type": "decision"
+    },
+    {
+      "findings": [
+        {
+          "criterion": "no page side effects",
+          "evidence": "onKey: KEYMAP includes F5/F11/F12 and KeyR etc.; preventDefault unconditional",
+          "id": "F1",
+          "severity": "minor"
+        },
+        {
+          "criterion": "keys release correctly",
+          "evidence": "push(): if (m && m._dg_push_key) ... else dropped, but held[code] already set",
+          "id": "F2",
+          "severity": "minor"
+        }
+      ],
+      "key": "rev:T4.review",
+      "reviewer_task": "T4.review",
+      "seq": 136,
+      "subject": "T4",
+      "task_id": null,
+      "ts": "2026-11-04T18:10:23.955+00:00",
+      "type": "review_done",
+      "verdict": "pass"
+    },
+    {
+      "accepted_sha": "3b22149a13c1d35da2e6718c9a86fb54eaf8f1ac",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T4.test-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "9bdae13a377cde9bc21e5bbf3cf4e3d12ff1c786",
+      "fingerprint_after": "9bdae13a377cde9bc21e5bbf3cf4e3d12ff1c786",
+      "seq": 142,
+      "task_id": "T4.test",
+      "ts": "2026-11-04T18:11:51.113+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 144,
+      "sha": "3b22149a13c1d35da2e6718c9a86fb54eaf8f1ac",
+      "task_id": "T4.test",
+      "ts": "2026-11-04T18:11:51.114+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "tst:T4.test",
+      "proposals": [
+        {
+          "file": "handoff/T4.test.tests/test_move_turn_fire.js",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T4.test.tests/test_run_and_release.js",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T4.test.tests/test_page_side_effects.js",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T4.test.tests/test_edge_cases.js",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T4.test.tests/t4lib.js",
+          "result": "not_run"
+        }
+      ],
+      "seq": 146,
+      "subject": "T4",
+      "task_id": null,
+      "tester_task": "T4.test",
+      "ts": "2026-11-04T18:11:51.142+00:00",
+      "type": "tester_evidence"
+    },
+    {
+      "accepted_sha": "a90bc69a3c66e4c93779d8739c61bdadacfc11a4",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T5-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "2d1904c9c1f911bb9f4b8a06f8c10d0dd967097e",
+      "fingerprint_after": "2d1904c9c1f911bb9f4b8a06f8c10d0dd967097e",
+      "seq": 152,
+      "task_id": "T5",
+      "ts": "2026-11-04T18:15:36.454+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 154,
+      "sha": "a90bc69a3c66e4c93779d8739c61bdadacfc11a4",
+      "task_id": "T5",
+      "ts": "2026-11-04T18:15:36.457+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "acc:T5",
+      "profile": "audio",
+      "seq": 156,
+      "sha": "a90bc69a3c66e4c93779d8739c61bdadacfc11a4",
+      "task": "T5",
+      "task_id": null,
+      "ts": "2026-11-04T18:15:36.459+00:00",
+      "type": "task_accepted"
+    },
+    {
+      "accepted_sha": "c9e32fbba7345f8733f32b06ee4ebb9bb365c898",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T5.review-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "dbfdb76ab261809ddb7a55712a941ad3133ef1c7",
+      "fingerprint_after": "dbfdb76ab261809ddb7a55712a941ad3133ef1c7",
+      "seq": 162,
+      "task_id": "T5.review",
+      "ts": "2026-11-04T18:15:56.202+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 164,
+      "sha": "c9e32fbba7345f8733f32b06ee4ebb9bb365c898",
+      "task_id": "T5.review",
+      "ts": "2026-11-04T18:15:56.204+00:00",
+      "type": "decision"
+    },
+    {
+      "findings": [
+        {
+          "criterion": "Sound parameters follow engine updates",
+          "evidence": "platform/i_sound_web.c dg_audio_params(channel, vol, sep) only updates gain; sep is ignored",
+          "id": "F1",
+          "severity": "minor"
+        },
+        {
+          "criterion": "Robustness",
+          "evidence": "audioUnlock() is called on every keydown, including unmapped keys, and only a pointerdown listener is added besides",
+          "id": "F2",
+          "severity": "minor"
+        }
+      ],
+      "key": "rev:T5.review",
+      "reviewer_task": "T5.review",
+      "seq": 166,
+      "subject": "T5",
+      "task_id": null,
+      "ts": "2026-11-04T18:15:56.267+00:00",
+      "type": "review_done",
+      "verdict": "pass"
+    },
+    {
+      "accepted_sha": "ed246a3b5bb74d8484fe19f632e6dc6c59140492",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T5.test-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "26456409bb908bda31335e3ea6b499570af3f161",
+      "fingerprint_after": "26456409bb908bda31335e3ea6b499570af3f161",
+      "seq": 172,
+      "task_id": "T5.test",
+      "ts": "2026-11-04T18:17:10.074+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 174,
+      "sha": "ed246a3b5bb74d8484fe19f632e6dc6c59140492",
+      "task_id": "T5.test",
+      "ts": "2026-11-04T18:17:10.076+00:00",
+      "type": "decision"
+    },
+    {
+      "key": "tst:T5.test",
+      "proposals": [
+        {
+          "file": "handoff/T5.test.tests/test_wasm_exports.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T5.test.tests/test_audio_browser.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T5.test.tests/test_audio_regression.py",
+          "result": "not_run"
+        },
+        {
+          "file": "handoff/T5.test.tests/test_audio_source.py",
+          "result": "not_run"
+        }
+      ],
+      "seq": 176,
+      "subject": "T5",
+      "task_id": null,
+      "tester_task": "T5.test",
+      "ts": "2026-11-04T18:17:10.106+00:00",
+      "type": "tester_evidence"
+    },
+    {
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/FINAL-1",
+      "gate": "final",
+      "head_sha": "a90bc69a3c66e4c93779d8739c61bdadacfc11a4",
+      "key": "final:1",
+      "seq": 177,
+      "task_id": null,
+      "ts": "2026-11-04T18:22:28.952+00:00",
+      "type": "final_gate"
+    },
+    {
+      "accepted_sha": "8f50c885ede159fe0c5380e2c0c9bcc7ba35547c",
+      "attempt": 1,
+      "classification": "tests_passed",
+      "decision": "PASS",
+      "evidence": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/FINAL.review-a1-v0",
+      "exit_code": 0,
+      "fingerprint": "8cf04b5353ec3daca5bfa37657297af3ede9e169",
+      "fingerprint_after": "8cf04b5353ec3daca5bfa37657297af3ede9e169",
+      "seq": 183,
+      "task_id": "FINAL.review",
+      "ts": "2026-11-04T18:22:52.629+00:00",
+      "type": "verification",
+      "verify_try": 0,
+      "violations": []
+    },
+    {
+      "action": "accept",
+      "attempt": 1,
+      "seq": 185,
+      "sha": "8f50c885ede159fe0c5380e2c0c9bcc7ba35547c",
+      "task_id": "FINAL.review",
+      "ts": "2026-11-04T18:22:52.631+00:00",
+      "type": "decision"
+    },
+    {
+      "findings": [
+        {
+          "criterion": "robustness",
+          "evidence": "web/doom-boot.js getPreloadedPackage uses synchronous XHR",
+          "id": "F1",
+          "severity": "minor"
+        }
+      ],
+      "key": "rev:FINAL.review",
+      "reviewer_task": "FINAL.review",
+      "seq": 187,
+      "subject": "FINAL",
+      "task_id": null,
+      "ts": "2026-11-04T18:22:52.659+00:00",
+      "type": "review_done",
+      "verdict": "pass"
+    }
+  ]
+}

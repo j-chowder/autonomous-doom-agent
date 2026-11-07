@@ -1,0 +1,1 @@
+{"verdict":"pass","summary":"Cumulative change is a single-line fix in web/index.html: script src doom-missing.js (404) -> doom.js, which build.sh produces (-o build/doom.js, copied to dist/doom/). No tests, assets, loop, third_party or artifacts touched; minimal and in scope. Final gate already passed.","findings":[]}

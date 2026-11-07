@@ -37,7 +37,10 @@ OBJECTIVE = ("Port the supplied doomgeneric engine to WebAssembly so DOOM Episod
              "shareware WAD. READ tests/doom/ACCEPTANCE.md FIRST: it defines the build and serve interface (build.sh -> dist/doom/), the six "
              "read-only test hooks (platform/dg_test_hooks.c), the criteria and the cumulative verification gates. Order the plan by gate: "
              "build, boot, m1, video, time, input, audio, final. A task's profile is the gate that proves it; later gates include earlier ones. "
-             "Milestone 1 is gate m1.")
+             "Milestone 1 is gate m1. There are 8 gates but at most 6 tasks per plan: COMBINE adjacent gate stages into one task (for example "
+             "build+boot, or time+input) and give the task the HIGHEST gate it covers as its profile. Keep tasks in gate order; never skip ahead. "
+             "The controller runs gate final itself after the last task, so no task needs profile final; use it only for a task that repairs "
+             "something only that gate finds.")
 CONSTRAINTS = ("Never change third_party, assets, loop, tests or artifacts. Do not add test-only exports beyond the six DG_TEST_ getters. "
                "Keep the browser runtime separate from any agent tooling. build.sh must work with no network inside the Emscripten 4.0.18 image.")
 ALLOWED = ["platform", "web", "build.sh", "build", "dist"]

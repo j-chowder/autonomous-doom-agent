@@ -1,0 +1,138 @@
+{
+  "decision": "FAIL",
+  "classification": "scope_violation",
+  "base_sha": "cbf492d0cb0e717fc56b9ee70cc3e14c9764d2d1",
+  "worktree": "/Users/jadenc/Desktop/bse/capstone/build/worktrees/20261104T090707Z-ec79b6/QA-AUTHOR-a2-75720a",
+  "test_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/Users/jadenc/Desktop/bse/capstone/loop/doom_setup.py",
+    "lint"
+  ],
+  "allowed": [
+    "tests/doom/trusted"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore",
+    "tests/doom/ACCEPTANCE.md",
+    "tests/doom/frozen.json"
+  ],
+  "fingerprint": "574ca88215d197227b1b3d6d4f1a6794c980970a",
+  "fingerprint_after": null,
+  "changed": [
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/README.md"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/controls.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/derive.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/groups/audio.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/groups/boot.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/groups/build.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/groups/input.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/groups/stability.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/groups/time.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/groups/video.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/lib/faults.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/lib/model.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/lib/site.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/lib/util.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/lib/wad.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/lib/wasm.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/main.js"
+    },
+    {
+      "status": "A",
+      "path": "tests/doom/trusted/run.sh"
+    }
+  ],
+  "violations": [
+    {
+      "status": "I",
+      "path": "loop/__pycache__/__init__.cpython-314.pyc",
+      "reason": "protected"
+    },
+    {
+      "status": "I",
+      "path": "loop/__pycache__/controller.cpython-314.pyc",
+      "reason": "protected"
+    },
+    {
+      "status": "I",
+      "path": "loop/__pycache__/preserve.cpython-314.pyc",
+      "reason": "protected"
+    },
+    {
+      "status": "I",
+      "path": "loop/__pycache__/runner.cpython-314.pyc",
+      "reason": "protected"
+    },
+    {
+      "status": "I",
+      "path": "loop/__pycache__/state.cpython-314.pyc",
+      "reason": "protected"
+    },
+    {
+      "status": "I",
+      "path": "loop/__pycache__/verify.cpython-314.pyc",
+      "reason": "protected"
+    }
+  ],
+  "exit_code": null,
+  "log": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T090707Z-ec79b6/verify/QA-AUTHOR-a2-v0/verify.log",
+  "duration_s": 0.227
+}

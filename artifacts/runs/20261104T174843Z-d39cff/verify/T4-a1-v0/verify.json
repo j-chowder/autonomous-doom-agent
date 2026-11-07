@@ -1,0 +1,58 @@
+{
+  "decision": "PASS",
+  "classification": "tests_passed",
+  "base_sha": "85abac577a4bbfead86da82a2060c9bfa1f9b048",
+  "worktree": "/Users/jadenc/Desktop/bse/capstone/build/worktrees/20261104T174843Z-d39cff/T4-a1-ac682a",
+  "test_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+    "run",
+    "--trusted",
+    "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+    "--timeout",
+    "1500",
+    "--",
+    "bash",
+    "/trusted/run.sh",
+    "input"
+  ],
+  "allowed": [
+    "platform",
+    "web",
+    "build.sh",
+    "build",
+    "dist"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "tests",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore"
+  ],
+  "fingerprint": "c27e5fbe17f6b4f59dcc859ee2dee9a4e245840c",
+  "fingerprint_after": "c27e5fbe17f6b4f59dcc859ee2dee9a4e245840c",
+  "changed": [
+    {
+      "status": "M",
+      "path": "build.sh"
+    },
+    {
+      "status": "M",
+      "path": "platform/doomgeneric_wasm.c"
+    },
+    {
+      "status": "M",
+      "path": "web/doom-boot.js"
+    }
+  ],
+  "violations": [],
+  "exit_code": 0,
+  "log": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/T4-a1-v0/verify.log",
+  "duration_s": 68.715
+}

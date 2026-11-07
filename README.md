@@ -1,240 +1,78 @@
-# Capstone: build an agent loop to port DOOM
+<div align="center">
 
-**You have one week to design, operate, and evaluate a multi-agent system
-that can carry a substantial software task through to a verified result.**
+# ✦ Autonomous DOOM Agent
 
-Your workload is porting the supplied Doom engine from C to WebAssembly
-with Emscripten so it runs and plays in a browser. You decide what faithful
-play means and how to establish it.
+**A small Python controller that lets AI agents port DOOM to the browser, and only accepts work that locked tests prove.**
 
-The main deliverable is your loop: how it assigns work, challenges claims,
-uses evidence, preserves state, recovers from failure, and decides to stop.
-A working game is necessary, but it does not establish that your system works.
+![Python](https://img.shields.io/badge/python-controller-3776ab?style=flat-square)
+![Emscripten](https://img.shields.io/badge/emscripten-4.0.18-e34c26?style=flat-square)
+![Playwright](https://img.shields.io/badge/playwright-1.56.1-2da44e?style=flat-square)
+![Final gate](https://img.shields.io/badge/final_gate-PASS-2da44e?style=flat-square)
 
-## Your responsibility
+</div>
 
-This is a brief for you, the student. You must turn it into an architecture,
-role-specific instructions, acceptance criteria, and an evaluation plan.
-Passing this README to an ordinary coding agent and submitting its output
-does not satisfy the assignment.
+**Autonomous DOOM Agent** ports the supplied doomgeneric engine to WebAssembly using Claude Code agents, so you can play DOOM Episode 1 in a browser. It is different from a plain coding agent because the agents never accept their own work: a plain-Python controller checks which files each agent touched, then runs hash-locked tests in a no-network Docker container. A failed check goes back to the agent as feedback.
 
-You own the system design and the decisions about what evidence to trust.
-Agents implement and repair the port. Design the loop yourself; repository
-agent instructions prohibit agents from designing it or modifying `loop/`.
-You must explain your choices and demonstrate their consequences.
-Record manual interventions rather than attributing them to the loop.
+<p align="center"><img src="docs/demo.png" width="560" alt="E1M1 frame captured by the automated test"></p>
+<p align="center"><sub>A real frame captured by the automated test run.</sub></p>
 
-## Design decisions you must make
+## 🚀 Quick start
 
-Before implementation, document your answers in `loop/`:
+Build with the pinned toolchain (Emscripten 4.0.18), then serve and open <http://127.0.0.1:8000/doom/>:
 
-- **Work:** How does a broad goal become bounded tasks? Who decides what
-  happens next when agents disagree or progress stalls?
-- **Context:** What does each role see? What information must survive when
-  every agent starts with a fresh context?
-- **Authority:** Which tools and files can each role access? Who can change
-  the checks used to accept the coder's work?
-- **Evidence:** What constitutes success? How will you distinguish a plausible
-  report from a verified result, and a weak check from a useful one?
-- **Recovery:** What happens after a tool error, failed check, interrupted
-  run, or repeated unsuccessful repair?
-- **Limits:** What are the time, token or cost, and retry budgets? How do
-  success, exhaustion, and stalled progress produce different stopping decisions?
-
-There is no prescribed orchestration algorithm. Your design should make these
-choices explicit and testable.
-
-## Required roles and tools
-
-Use separate **coder, reviewer, and tester** agent invocations, with separate
-contexts and explicit handoffs. They may use the same model. Define their
-responsibilities, permissions, and the information exchanged between them.
-A single agent describing itself as three roles is not sufficient.
-
-Use **MCP for tool access and handoffs** where needed. Include the relevant tool definitions
-and configuration. Explain how the tools enforce the boundaries you chose;
-role names and prompts alone do not enforce permissions.
-
-Sandboxing is recommended but optional; see [SANDBOX.md](SANDBOX.md). Document
-network access and pin your toolchain version. Keep credentials out of the
-repository and sandbox.
-
-## Evaluate the system you built
-
-Write your own measurable acceptance criteria before the agents implement
-the port. Cover actual use in your chosen browser and explain the limits of
-your checks. A successful compile, screenshot, or agent declaration alone
-cannot establish that the task is complete.
-
-Your evaluation must demonstrate:
-
-- **Independent verification:** acceptance checks are protected from coder
-  edits, and results identify the source revision and supporting evidence.
-- **Checks that catch faults:** deliberately broken behavior causes the
-  relevant checks to fail. Explain what those checks still cannot establish.
-- **Autonomous repair:** after initial success, a teammate or instructor
-  introduces at least two regressions without disclosing their cause to the
-  repair agents. The loop detects and repairs them and verifies the result.
-- **Resumption:** an interrupted run continues with fresh agent contexts
-  using saved state, without you reconstructing its history by hand.
-- **Accountability:** you can trace findings to subsequent actions and explain
-  the resource usage, manual interventions, and final stopping decision.
-
-Preserve failing evidence as well as passing evidence. Record changes to
-acceptance criteria separately, with a reason. Discuss disagreements and
-missed faults in your write-up.
-
-## Where your work belongs
-
-| Location | Purpose |
-| --- | --- |
-| [`loop/`](loop/README.md) | All loop code, prompts, role definitions, MCP configuration, and design documentation. |
-| [`artifacts/`](artifacts/README.md) | All durable run state, handoffs, logs, review findings, and evidence. Agents must use this folder between runs. |
-| `tests/` | Verification code, including checks for the loop itself. |
-| `platform/`, `web/` | The port and browser page. |
-| `third_party/doomgeneric/` | Supplied engine; platform ports have been removed. |
-| `assets/` | Included shareware `doom1.wad` (Episode 1). |
-| `build/`, `dist/` | Generated build output. |
-
-Keep the root for project documentation and shared build/toolchain files.
-The starter supplies engine source, platform and HTML stubs, the shareware
-WAD, documentation, and an optional Docker toolchain. It supplies no working
-game, build script, loop implementation, or test suite. `artifacts/` starts
-with its README only; students create run evidence there during the project.
-Use the supplied engine and Emscripten. Documentation is allowed; copying an
-existing Doom browser port does not satisfy the assignment.
-
-See [`platform/README.md`](platform/README.md) for engine integration caveats,
-including pixel format, timing, and audio. The supplied game data already
-contains sound effects and music; no additional sound assets are required.
-
-## Agent section for setup
-
-### macOS without Docker
-
-Install the build tools directly on your Mac to compile and test the browser
-port. Docker is not required for this workflow. There is currently no macOS
-setup script; run the steps below manually.
-
-1. **Install prerequisites.** In Terminal, run:
-
-   ```sh
-   xcode-select --install
-   ```
-
-   Finish the installer, then check `git --version` and `python3 --version`.
-   If Python is missing, install it from [python.org](https://www.python.org/downloads/macos/),
-   or run `brew install python` if you already have Homebrew.
-
-2. **Install Emscripten.** Use version `4.0.18` to match the supplied Dockerfile:
-
-   ```sh
-   mkdir -p ~/Developer
-   cd ~/Developer
-   git clone https://github.com/emscripten-core/emsdk.git
-   cd emsdk
-   ./emsdk install 4.0.18
-   ./emsdk activate 4.0.18
-   source ./emsdk_env.sh
-   emcc --version
-   ```
-
-   If you already have an SDK checkout at that location, use it instead of
-   cloning again. In each new Terminal session where you want to compile, run:
-
-   ```sh
-   source ~/Developer/emsdk/emsdk_env.sh
-   ```
-
-   See the [official installation instructions](https://emscripten.org/docs/getting_started/downloads.html).
-
-3. **Verify the compiler and browser workflow.** Return to this repository's
-   root directory, then run:
-
-   ```sh
-   mkdir -p build/smoke
-   cat > build/smoke/hello.c <<'EOF'
-   #include <stdio.h>
-   int main(void) {
-       printf("Emscripten works!\n");
-       return 0;
-   }
-   EOF
-
-   emcc build/smoke/hello.c -o build/smoke/index.html
-   python3 -m http.server 8000 --bind 127.0.0.1 --directory build/smoke
-   ```
-
-   Open <http://localhost:8000>. The generated page should print
-   `Emscripten works!`. Press **Control-C** in Terminal to stop the server.
-   This verifies the toolchain and local serving, not the game.
-
-4. **Have your agents implement and build the game.** The supplied platform callbacks are
-   empty, there is no entry point or build script, and the HTML does not yet
-   load a compiled module. These are student implementation tasks; see
-   [platform/README.md](platform/README.md). Document the actual build command
-   once implemented. A completed build could produce:
-
-   ```text
-   dist/
-     index.html
-     doom.js
-     doom.wasm
-     doom.data
-   ```
-
-   The exact filenames depend on the build configuration. For example,
-   `doom.data` could contain the packaged shareware WAD. The build must make
-   that WAD available to the engine inside the browser module.
-
-5. **Test the completed game locally.** Once the build output is in `dist/`,
-   run this from the repository root:
-
-   ```sh
-   python3 -m http.server 8000 --bind 127.0.0.1 --directory dist
-   ```
-
-   Open <http://localhost:8000> and exercise the game's behavior. Use a local
-   web server rather than opening the HTML file directly, as explained in
-   [Emscripten's deployment documentation](https://emscripten.org/docs/compiling/Deploying-Pages.html).
-
-6. **Publish to a personal website.** Upload the contents of `dist/` to a
-   directory such as `/doom/` on your static host, preserving relative paths.
-   Visit `https://your-domain.com/doom/` and verify the deployed game. Ensure
-   the host serves `.wasm` files with the `application/wasm` content type.
-   Builds using shared-memory threads also need cross-origin isolation
-   headers. Visitors need only a compatible browser; Emscripten is a build
-   tool installed on the developer's machine.
-
-### How to run the loop
-
-There is no runnable loop in the starter. `loop/loop.sh` contains only shell
-setup, and `loop/agents.yaml` is empty. Running the script currently does no
-work. Students must implement and document their own entry point and
-dependencies before running it.
-
-If your completed implementation uses `loop/loop.sh`, run it from the
-repository root:
-
-```sh
-chmod +x ./loop/loop.sh
-./loop/loop.sh
+```bash
+docker build -t doom-capstone-toolchain .
+docker run --rm -v "$PWD":/workspace doom-capstone-toolchain bash build.sh
+python3 -m http.server 8000 --bind 127.0.0.1 --directory dist
 ```
 
-## What to hand in
+Click the canvas, then use arrows to move, `Ctrl` to fire, `Space` to open doors, `Shift` to run.
 
-- Your loop implementation and design rationale in `loop/`, with instructions
-  for setup, starting, and resuming a run.
-- The resulting port, its build/run instructions, and readable Git history.
-- Your acceptance criteria, verification code, and evidence for the final revision.
-- Artifacts demonstrating review, failed checks, repair, resumption, resource
-  usage, and the stopping decision.
-- A short reflection: what your architecture helped catch, what it missed,
-  and which design choice you would change based on the evidence.
+## 🧭 How it works
 
-Be prepared to explain why each role and handoff earns its place in the system.
+| Step | Who | What happens |
+|:-:|---|---|
+| 1 | Planner (AI) | Splits the goal into at most 6 small tasks |
+| 2 | Coder (AI) | Edits only its own folders, in a fresh git worktree |
+| 3 | Controller | Any file outside the role's lane fails the attempt |
+| 4 | Controller | Runs locked tests in Docker (no network, read-only) |
+| 5 | Controller | Pass: saves a permanent git ref. Fail: retry, max 3 attempts |
 
-## License and game data
+Reviewer and tester agents run independently and cannot edit code. Details: [`loop/step5.md`](loop/step5.md).
 
-Keep the engine's license notices; see [LICENSE](LICENSE). Use only the
-shareware `doom1.wad` for this assignment. Do not add commercial WADs.
+**Who wrote what.** I designed and built the orchestration, role permissions, recovery and verification policy (`loop/`, loop tests in `tests/`). AI agents wrote the port (`platform/`, `web/`, `build.sh`): every commit authored `loop` in the history is agent work accepted by the controller. The trusted browser tests in `tests/doom/trusted/` were written by a separate QA agent and reviewed by me ([provenance](tests/doom/QA-PROVENANCE.md)).
+
+## ✅ Results
+
+| Run | Outcome | Evidence |
+|---|---|---|
+| Build from scratch | 5 tasks, 19 agent runs, final gate PASS, 0 open findings | [`report`](artifacts/runs/20261104T174843Z-d39cff/summary.md) · tag `port-complete` |
+| Sabotage 1: page loads a missing script | Repaired by agents (one-file fix), final gate PASS | [`report`](artifacts/runs/20261104T185606Z-3582b6/summary.md) · tags `regression-1-injected` → `regression-1-repaired` |
+| Sabotage 2: up arrow mapped to backward | Repaired by agents (one-line fix), final gate PASS | [`report`](artifacts/runs/20261104T202813Z-ed0024/summary.md) · tags `regression-2-injected` → `regression-2-repaired` |
+
+Faults were injected by the author. The evidence index is in [`artifacts/README.md`](artifacts/README.md).
+
+## ⚠️ Known issues
+
+- **Agents are not sandboxed.** They run on the host in git worktrees; only verification is containerized. Docker-sandboxing agents clashed with Claude's login.
+- **Tests were written by an AI and reviewed by a human.** The QA task ended BLOCKED on a stray `.pyc` file and was recovered by hand. See [`tests/doom/QA-PROVENANCE.md`](tests/doom/QA-PROVENANCE.md).
+- **Strictly sequential.** One agent at a time keeps runs auditable but slow.
+
+## 🛠 Run the tests
+
+```bash
+python3 -m unittest discover -s tests -p "test_*.py"   # 85 loop tests: state, runner, verifier, controller, coordinator
+bash tests/doom/trusted/run.sh final                    # trusted browser gate; run inside the toolchain image
+```
+
+The loop entry point is `loop/loop.sh` (controller) and `python3 -m loop.coordinator POLICY.json` (multi-agent run). Agents need the `docker-agent` CLI and a Claude Code login; see [`loop/README.md`](loop/README.md).
+
+## 🙏 Acknowledgments
+
+- Started as a capstone for the **UCLA Bruin Software Engineers (BSE) Loop Engineering Fellowship**. The starter repository supplied the engine, the shareware WAD, platform stubs and the toolchain `Dockerfile`; the original brief is kept in [`docs/original-assignment/`](docs/original-assignment/).
+- Engine: [doomgeneric](https://github.com/ozkl/doomgeneric) by ozkl, based on the DOOM source released by id Software (GPLv2). See [`third_party/doomgeneric/README.TXT`](third_party/doomgeneric/README.TXT).
+- `assets/doom1.wad` is the DOOM shareware data from id Software, included unmodified.
+
+## License
+
+GPL-2.0, see [`LICENSE`](LICENSE), following the DOOM engine source.

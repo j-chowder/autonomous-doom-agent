@@ -1,0 +1,40 @@
+{
+  "decision": "PASS",
+  "classification": "tests_passed",
+  "base_sha": "a90bc69a3c66e4c93779d8739c61bdadacfc11a4",
+  "worktree": "/Users/jadenc/Desktop/bse/capstone/build/worktrees/20261104T174843Z-d39cff/FINAL.review-a1-f3cf32",
+  "test_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/Users/jadenc/Desktop/bse/capstone/loop/handoff.py",
+    "check",
+    "reviewer",
+    "handoff/FINAL.review.json"
+  ],
+  "allowed": [
+    "handoff/FINAL.review.json"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "tests",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore"
+  ],
+  "fingerprint": "8cf04b5353ec3daca5bfa37657297af3ede9e169",
+  "fingerprint_after": "8cf04b5353ec3daca5bfa37657297af3ede9e169",
+  "changed": [
+    {
+      "status": "A",
+      "path": "handoff/FINAL.review.json"
+    }
+  ],
+  "violations": [],
+  "exit_code": 0,
+  "log": "/Users/jadenc/Desktop/bse/capstone/artifacts/runs/20261104T174843Z-d39cff/verify/FINAL.review-a1-v0/verify.log",
+  "duration_s": 0.55
+}

@@ -2,7 +2,7 @@
 
 Sandboxing agent tools is recommended but optional. This document describes
 the sandbox option; native macOS build and browser setup is in
-[README.md](README.md#agent-section-for-setup). Docker is not required to
+[README.md](README.md#agent-section-for-setup) (the original assignment brief in this folder). Docker is not required to
 build the port or serve its generated files.
 
 If you choose a sandbox:

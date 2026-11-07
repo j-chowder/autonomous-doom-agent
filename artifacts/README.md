@@ -1,53 +1,16 @@
-# Run artifacts
+# Evidence
 
-**Agents must use this folder for durable artifacts between runs.**
+Curated records from the real runs. Large logs, preserved worktrees and build copies are not included; the full set was kept locally.
 
-The distributed starter contains only this README in this folder. Create
-run records when student work begins; starter preparation notes and sample
-results are not included.
+| Path | Contents |
+|---|---|
+| `runs/20261104T174843Z-d39cff/` | Port from scratch: plan, 5 tasks, reviews, tester reports, feedback, final gate |
+| `runs/20261104T185606Z-3582b6/` | Regression 1 repair (startup) |
+| `runs/20261104T202813Z-ed0024/` | Regression 2 repair (keyboard) |
+| `runs/20261104T090707Z-ec79b6/` | QA test-authoring task. Ended BLOCKED; see `tests/doom/QA-PROVENANCE.md` |
+| `sandbox-runs/20261104T185254Z-c6cc6167/` | Trusted `boot` gate failing on injected regression 1 |
+| `sandbox-runs/20261104T202103Z-326e0efa/` | Trusted `input` gate failing on injected regression 2 (forward movement -48.0) |
+| `sandbox-runs/20261104T202936Z-8867be80/` | A passing gate run during the regression 2 repair, with screenshots |
+| `doom/*.json` | Policies used for the three runs (roles, allowed paths, budgets, test hashes) |
 
-Anything saved for a later agent or run—state, plans, handoffs, logs, review
-findings, test results, screenshots, recordings, or reports—belongs here.
-Fresh agent contexts must be able to resume using the repo and this folder.
-
-Loop code, prompts, and configuration belong in [`loop/`](../loop/README.md).
-Port code belongs in `platform/` and `web/`, verification code in `tests/`,
-and game assets in `assets/`. Shared build files may live at the root. Build products
-may live in `build/` or `dist/`; link to them from a run record when useful.
-Temporary scratch files may be disposable, but anything needed for a
-handoff, resumption, or evaluation must be copied here before a run ends.
-
-## Suggested layout
-
-You can choose a different layout inside this folder. Document it so another
-agent can find the current state without reading your conversation.
-
-```text
-artifacts/
-  README.md
-  state.json                 # Current run, next task, and stopping status
-  runs/
-    <unique-run-id>/
-      manifest.json          # Source revision, environment, budgets, usage
-      handoffs/              # Tasks and responses between roles
-      reviews/               # Findings and their resolution
-      logs/                  # Tool and build output
-      tests/                 # Commands, results, screenshots, recordings
-      summary.md             # Outcome and next steps
-```
-
-## Required habits
-
-- Give each run a unique ID. Preserve earlier results instead of overwriting
-  failure evidence with the latest passing output.
-- Record the source revision and any uncommitted changes being tested.
-  Evidence from an older revision does not establish that the current one passes.
-- Save the current task, unresolved findings, artifact paths, and next action
-  before handing off or stopping. Include the stopping reason and resource usage.
-- Reference evidence with paths relative to the repo, so it works in a sandbox.
-- Include the artifacts needed to assess your submission. Explain any omitted
-  large files and how to reproduce them.
-- Do not store credentials, API keys, or commercial game data here. Sanitize
-  logs before saving them.
-
-This folder starts with instructions only. Your loop creates the run records.
+Each run folder has `summary.md` (human-readable) and `report.json` (full event journal). Absolute paths in these files refer to the original machine.

@@ -1,0 +1,385 @@
+{
+  "objective": "Diagnose and autonomously repair the browser keyboard input regression in the DOOM WebAssembly implementation. Restore correct gameplay keyboard behavior and pass all trusted acceptance tests. Do not modify trusted tests.",
+  "constraints": "Never change third_party, assets, loop, tests or artifacts. Do not add test-only exports beyond the six DG_TEST_ getters. Keep the browser runtime separate from any agent tooling. build.sh must work with no network inside the Emscripten 4.0.18 image.",
+  "base_sha": "4e56aa8e508e2cd8a7172f9b481cac1e79fabca0",
+  "mode": "real",
+  "agent": {
+    "config": "/Users/jadenc/Desktop/bse/capstone/loop/agents.yaml",
+    "binary": "docker-agent"
+  },
+  "allowed_roots": [
+    "platform",
+    "web",
+    "build.sh",
+    "build",
+    "dist"
+  ],
+  "protected": [
+    "third_party",
+    "assets",
+    "loop",
+    "tests",
+    "artifacts",
+    "AGENTS.md",
+    "SANDBOX.md",
+    "README.md",
+    "Dockerfile",
+    ".gitignore"
+  ],
+  "coder_roles": {
+    "wasm_platform": {
+      "agent": "coder",
+      "allowed_roots": [
+        "platform",
+        "build.sh",
+        "build",
+        "dist"
+      ]
+    },
+    "web_frontend": {
+      "agent": "coder",
+      "allowed_roots": [
+        "web",
+        "build.sh",
+        "dist"
+      ]
+    },
+    "integrator": {
+      "agent": "coder",
+      "allowed_roots": [
+        "platform",
+        "web",
+        "build.sh",
+        "build",
+        "dist"
+      ]
+    }
+  },
+  "profiles": {
+    "build": {
+      "description": "BUILD-01: clean build.sh -> dist/doom, valid wasm, hook exports",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "600",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "build"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    },
+    "boot": {
+      "description": "build + LOAD-01 (engine starts, canvas not blank) + WAD-01 (E1M1 player start)",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "600",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "boot"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    },
+    "m1": {
+      "description": "boot + STABILITY-01 (short) + DEPLOY-01 (static /doom/ subpath, wasm MIME). MILESTONE 1",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "900",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "m1"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    },
+    "video": {
+      "description": "m1 + VIDEO-01 (opaque alpha, WAD-derived colors, frames change)",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "1000",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "video"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    },
+    "time": {
+      "description": "video + TIME-01 (35 tics/s +-25%, 10 s window) + TIME-02 (heartbeat, watchdog)",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "1200",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "time"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    },
+    "input": {
+      "description": "time + INPUT-01/02/03 (move, turn, fire, run, key release, no page side effects)",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "1500",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "input"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    },
+    "audio": {
+      "description": "input + AUDIO-01 (audio context running, non-silent output after firing)",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "1500",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "audio"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    },
+    "final": {
+      "description": "audio + 60 s timing window + 60 s soak + all negative controls. Completion gate",
+      "test_argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py",
+        "run",
+        "--trusted",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted",
+        "--timeout",
+        "3000",
+        "--",
+        "bash",
+        "/trusted/run.sh",
+        "final"
+      ],
+      "test_files": {
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/README.md": "ac1b2e58bec58900d1ae401e9bd68b273caea7630313cc303f562e9ec137db5c",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/controls.js": "c6f38f1effc78971623720a2cc6de40a9074545b0948e7052a339ee9931415c7",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/derive.js": "82a39c0abb86dfdff382a18b873d530da23c7332929bd764a3e9c81c484dd505",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/audio.js": "7b1a38e1cbc188411d40d1c56d82dd52c600bbbf970dc67ab6d93c83130b2658",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/boot.js": "d025a0f59933ea64d9d158a1de54247060dbdb5424d4b0342fa8724838ec510e",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/build.js": "86dddcb68977030d7dd142e89a0b93a7477f53d01f6c0c47ca0ffede88a83fc0",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/input.js": "0494b347f41e8d641c8508c291b8657d6ab24efebd30084544aa060d141013fc",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/stability.js": "4250c651f40da4fa6f3d7ef2fd62f962e79c7e5b095cc6bb9fcb468020d7deee",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/time.js": "f22e770a969eb522ca8832a691b5fa68a31b93a150c92cdd83ac1dd536d46386",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/groups/video.js": "614cdfd84ed4acb980e937a05d7a0995c1fc231ac20015567c405efefe823a9a",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/faults.js": "166564d995add89db826048f16b6b3aadb0dfe44041e1cd34dd8ac84be3fd715",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/model.js": "67c21541a38b2e2bb393300c30b83fbdc4a4717dc95b7887e7ea13efb95fd874",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/site.js": "2781d2198181d5344cd5ea370598c266cd7f6f4f88d8e5117b5a00f550c7ba4f",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/util.js": "a33aff6c36e7f38ef78016c17f5647a652ec6ec5cff18e317eb0c70e7308a468",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wad.js": "d6cf0b86c180ec35efa62ac6f4003e0a6dc3e7609392f0e61f992e9653d15c1d",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/lib/wasm.js": "8636e64810de1d5f701e9ceff77a3fd501416f88aedf0be500e4345a603489f1",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/main.js": "25e9aa7ee0fd6a1eb405f0cf6b359e8ee9b6cb7ed232d9adce9addbb07586d82",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/trusted/run.sh": "fbab303569e93b02bad35eb2cdc9ef91d57713595a2bc1152c742f307b0bc899",
+        "/Users/jadenc/Desktop/bse/capstone/tests/doom/ACCEPTANCE.md": "69b377b502684ff2a8d0025ae56ad86773caeb7c8fe84f067f15d5dabc8cd069",
+        "/Users/jadenc/Desktop/bse/capstone/loop/sandbox_verify.py": "fc025f6dc24c8eb02f5ff858527643f6d862c4f5465230caf5d9436b21abe370"
+      }
+    }
+  },
+  "final_gate": "final",
+  "review": {
+    "per_task": "flagged",
+    "flagged_paths": [
+      "platform/dg_test_hooks.c",
+      "build.sh"
+    ],
+    "final": true,
+    "max_fixes": 1
+  },
+  "budgets": {
+    "max_attempts": 3,
+    "max_runtime_s": 5400,
+    "agent_timeout_s": 1800,
+    "verify_timeout_s": 3300,
+    "verify_retries": 2,
+    "max_replans": 1,
+    "max_tasks": 6,
+    "max_invocations": 40,
+    "max_total_runtime_s": 21600
+  }
+}
